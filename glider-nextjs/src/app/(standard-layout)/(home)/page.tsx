@@ -3,7 +3,7 @@ import Dashboard from "./(dashboard)/dashboard"
 import type { Metadata } from "next"
  
 export const metadata: Metadata = {
-  title: "Home | Glider: Global logistics",
+  title: "Home | Glider: Advanced logistics",
   description: "Following up your business.",
 }
 
