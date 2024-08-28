@@ -1,13 +1,14 @@
 "use client";
 
-import { Bebas_Neue } from "next/font/google";
-import { useRouter } from "next/navigation";
-import { zodResolver } from "@hookform/resolvers/zod";
-import { useForm } from "react-hook-form";
-import { z } from "zod";
+import {useTranslations} from 'next-intl'
+import { Bebas_Neue } from "next/font/google"
+import { useRouter } from "next/navigation"
+import { zodResolver } from "@hookform/resolvers/zod"
+import { useForm } from "react-hook-form"
+import { z } from "zod"
 
-import { Button } from "@/components/ui/button";
-import { Input } from "@/components/ui/input";
+import { Button } from "@/components/ui/button"
+import { Input } from "@/components/ui/input"
 import {
   Form,
   FormControl,
@@ -16,7 +17,7 @@ import {
   FormLabel,
   FormMessage,
 } from "@/components/ui/form";
-import { Checkbox } from "@/components/ui/checkbox";
+import { Checkbox } from "@/components/ui/checkbox"
 
 const formSchema = z.object({
   username: z.string().min(2, {
@@ -35,7 +36,8 @@ const bebasNeue = Bebas_Neue({
 });
 
 export default function LoginForm() {
-  type FormValues = z.infer<typeof formSchema>;
+  const t = useTranslations('Login');
+  type FormValues = z.infer<typeof formSchema>
 
   const form = useForm<FormValues>({
     resolver: zodResolver(formSchema),
@@ -44,7 +46,7 @@ export default function LoginForm() {
       password: "K3oCs97e",
       rememberMe: true,
     },
-  });
+  })
 
   const router = useRouter();
 
@@ -57,7 +59,7 @@ export default function LoginForm() {
       <form onSubmit={form.handleSubmit(onSubmit)} className="w-[350px]">
         <div>
           <h1 className={`text-8xl -mb-4 ${bebasNeue.className}`}>Glider</h1>
-          <p className="text-muted-foreground pl-1">With you further.</p>
+          <p className="text-muted-foreground pl-1">{t('withYouFurther')}</p>
         </div>
         <div className="space-y-4 mt-8">
           <FormField
@@ -110,5 +112,5 @@ export default function LoginForm() {
         </Button>
       </form>
     </Form>
-  );
+  )
 }
