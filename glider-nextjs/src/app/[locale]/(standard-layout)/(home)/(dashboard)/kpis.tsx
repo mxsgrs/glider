@@ -20,7 +20,7 @@ export default function Kpis() {
                     <HeadingTwo title={t(kpi.title)} padding={0} />
                     <div className="mt-4">
                         <div className="text-4xl font-extrabold">{kpi.value}</div>
-                        <div className="text-muted-foreground">{kpi.variation}% {t('thisMonth')}</div>
+                        <div className="text-muted-foreground">{(kpi.variation < 0 ? "" : "+") + kpi.variation}% {t('thisMonth')}</div>
                     </div>
                 </div>
             ))}

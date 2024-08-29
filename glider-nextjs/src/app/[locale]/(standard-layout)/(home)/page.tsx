@@ -23,10 +23,6 @@ export async function generateMetadata({ params: { locale } }: Params): Promise<
 export default function Page() {
     const t = useTranslations('home')
 
-    if (!t) {
-        return null;
-    }
-
     return (
         <div>
             <PageHeader title={`${t('hello')} Robert`} subtitle={t('followUpBusiness')} />

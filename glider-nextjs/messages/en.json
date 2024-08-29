@@ -2,6 +2,10 @@
   "website": {
     "titleComplement": " | Glider: Advanced logistics"
   },
+  "locales": {
+    "en": "English",
+    "fr": "French"
+  },
   "login": {
     "metadataTitle": "Login",
     "metadataDescription": "Access to your account.",
@@ -20,6 +24,12 @@
     "products": "Products",
     "clients": "Clients",
     "tickets": "Tickets",
-    "thisMonth": "this month"
+    "thisMonth": "this month",
+    "platforms": "Platforms",
+    "desktop": "Desktop",
+    "mobile": "Mobile",
+    "browsers": "Browsers",
+    "visitors": "visitors",
+    "invoices": "Invoices"
   }
 }

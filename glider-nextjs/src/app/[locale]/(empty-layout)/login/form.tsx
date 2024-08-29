@@ -54,10 +54,6 @@ export default function LoginForm() {
     router.push('/')
   }
 
-  if (!t) {
-      return null;
-  }
-
   return (
     <Form {...form}>
       <form onSubmit={form.handleSubmit(onSubmit)} className="w-[350px]">

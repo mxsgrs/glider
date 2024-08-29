@@ -1,4 +1,6 @@
-"use client"
+'use client'
+
+import { useTranslations } from 'next-intl'
 
 import {
     Table,
@@ -8,58 +10,60 @@ import {
     TableHead,
     TableHeader,
     TableRow,
-} from "@/components/ui/table"
-import HeadingTwo from "@/components/ui/heading-two"
+} from '@/components/ui/table'
+import HeadingTwo from '@/components/ui/heading-two'
 
 const invoices = [
     {
-        invoice: "INV001",
-        paymentStatus: "Paid",
-        totalAmount: "$250.00",
-        paymentMethod: "Credit Card",
+        invoice: 'INV001',
+        paymentStatus: 'Paid',
+        totalAmount: '$250.00',
+        paymentMethod: 'Credit Card',
     },
     {
-        invoice: "INV002",
-        paymentStatus: "Pending",
-        totalAmount: "$150.00",
-        paymentMethod: "PayPal",
+        invoice: 'INV002',
+        paymentStatus: 'Pending',
+        totalAmount: '$150.00',
+        paymentMethod: 'PayPal',
     },
     {
-        invoice: "INV003",
-        paymentStatus: "Unpaid",
-        totalAmount: "$350.00",
-        paymentMethod: "Bank Transfer",
+        invoice: 'INV003',
+        paymentStatus: 'Unpaid',
+        totalAmount: '$350.00',
+        paymentMethod: 'Bank Transfer',
     },
     {
-        invoice: "INV004",
-        paymentStatus: "Paid",
-        totalAmount: "$450.00",
-        paymentMethod: "Credit Card",
+        invoice: 'INV004',
+        paymentStatus: 'Paid',
+        totalAmount: '$450.00',
+        paymentMethod: 'Credit Card',
     },
     {
-        invoice: "INV005",
-        paymentStatus: "Paid",
-        totalAmount: "$550.00",
-        paymentMethod: "PayPal",
+        invoice: 'INV005',
+        paymentStatus: 'Paid',
+        totalAmount: '$550.00',
+        paymentMethod: 'PayPal',
     },
     {
-        invoice: "INV006",
-        paymentStatus: "Pending",
-        totalAmount: "$200.00",
-        paymentMethod: "Bank Transfer",
+        invoice: 'INV006',
+        paymentStatus: 'Pending',
+        totalAmount: '$200.00',
+        paymentMethod: 'Bank Transfer',
     },
     {
-        invoice: "INV007",
-        paymentStatus: "Unpaid",
-        totalAmount: "$300.00",
-        paymentMethod: "Credit Card",
+        invoice: 'INV007',
+        paymentStatus: 'Unpaid',
+        totalAmount: '$300.00',
+        paymentMethod: 'Credit Card',
     },
 ]
 
 export default function InvoiceTable() {
+    const t = useTranslations('home')
+
     return (
         <div>
-            <HeadingTwo title="Invoice table" />
+            <HeadingTwo title={t('invoices')} />
             <Table className="mt-4">
                 <TableHeader>
                     <TableRow>

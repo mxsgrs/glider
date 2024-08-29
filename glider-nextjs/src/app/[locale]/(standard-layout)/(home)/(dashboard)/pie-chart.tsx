@@ -1,56 +1,60 @@
-"use client"
+'use client'
 
-import * as React from "react"
-import { Label, Pie, PieChart } from "recharts"
+import { useTranslations } from 'next-intl'
+import * as React from 'react'
+import { Label, Pie, PieChart } from 'recharts'
 import {
     ChartConfig,
     ChartContainer,
     ChartTooltip,
     ChartTooltipContent,
-} from "@/components/ui/chart"
-import HeadingTwo from "@/components/ui/heading-two"
+} from '@/components/ui/chart'
+import HeadingTwo from '@/components/ui/heading-two'
 
 const chartData = [
-    { browser: "chrome", visitors: 275, fill: "var(--color-chrome)" },
-    { browser: "safari", visitors: 200, fill: "var(--color-safari)" },
-    { browser: "firefox", visitors: 287, fill: "var(--color-firefox)" },
-    { browser: "edge", visitors: 173, fill: "var(--color-edge)" },
-    { browser: "other", visitors: 190, fill: "var(--color-other)" },
+    { browser: 'chrome', visitors: 275, fill: 'var(--color-chrome)' },
+    { browser: 'safari', visitors: 200, fill: 'var(--color-safari)' },
+    { browser: 'firefox', visitors: 287, fill: 'var(--color-firefox)' },
+    { browser: 'edge', visitors: 173, fill: 'var(--color-edge)' },
+    { browser: 'other', visitors: 190, fill: 'var(--color-other)' },
 ]
 
 const chartConfig = {
     visitors: {
-        label: "Visitors",
+        label: 'Visitors',
     },
     chrome: {
-        label: "Chrome",
-        color: "#a1c2d1",
+        label: 'Chrome',
+        color: '#a1c2d1',
     },
     safari: {
-        label: "Safari",
-        color: "#172333",
+        label: 'Safari',
+        color: '#172333',
     },
     firefox: {
-        label: "Firefox",
-        color: "#73abd0",
+        label: 'Firefox',
+        color: '#73abd0',
     },
     edge: {
-        label: "Edge",
-        color: "#c9d2e1",
+        label: 'Edge',
+        color: '#c9d2e1',
     },
     other: {
-        label: "Other",
-        color: "#4e5d72",
+        label: 'Other',
+        color: '#4e5d72',
     },
 } satisfies ChartConfig
 
 export function BrowserPieChart() {
+    const t = useTranslations('home')
+
     const totalVisitors = React.useMemo(() => {
         return chartData.reduce((acc, curr) => acc + curr.visitors, 0)
     }, [])
+
     return (
         <div>
-            <HeadingTwo title="Browser chart" />
+            <HeadingTwo title={t('browsers')} />
             <ChartContainer
                 config={chartConfig}
                 className="mx-auto aspect-square max-h-[335px]"
@@ -89,7 +93,7 @@ export function BrowserPieChart() {
                                                 y={(viewBox.cy || 0) + 24}
                                                 className="fill-muted-foreground"
                                             >
-                                                Visitors
+                                                {t('visitors')}
                                             </tspan>
                                         </text>
                                     )
