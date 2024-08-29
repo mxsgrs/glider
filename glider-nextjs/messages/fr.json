@@ -1,5 +1,9 @@
 {
-  "Login": {
-    "withYouFurther": "Avec vous plus loin."
+  "login": {
+    "withYouFurther": "Avec vous plus loin.",
+    "username": "Utilisateur",
+    "password": "Mot de passe",
+    "rememberMe": "Se rappeler de moi",
+    "submit": "Soumettre"
   }
 }
