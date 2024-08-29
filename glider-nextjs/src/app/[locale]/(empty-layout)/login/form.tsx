@@ -1,14 +1,14 @@
-'use client';
+'use client'
 
-import { useTranslations } from 'next-intl';
-import { Bebas_Neue } from 'next/font/google';
-import { useRouter } from 'next/navigation';
-import { zodResolver } from '@hookform/resolvers/zod';
-import { useForm } from 'react-hook-form';
-import { z } from 'zod';
+import { useTranslations } from 'next-intl'
+import { Bebas_Neue } from 'next/font/google'
+import { useRouter } from 'next/navigation'
+import { zodResolver } from '@hookform/resolvers/zod'
+import { useForm } from 'react-hook-form'
+import { z } from 'zod'
 
-import { Button } from '@/components/ui/button';
-import { Input } from '@/components/ui/input';
+import { Button } from '@/components/ui/button'
+import { Input } from '@/components/ui/input'
 import {
   Form,
   FormControl,
@@ -16,8 +16,8 @@ import {
   FormItem,
   FormLabel,
   FormMessage,
-} from '@/components/ui/form';
-import { Checkbox } from '@/components/ui/checkbox';
+} from '@/components/ui/form'
+import { Checkbox } from '@/components/ui/checkbox'
 
 const formSchema = z.object({
   username: z.string().min(2, {
@@ -27,17 +27,17 @@ const formSchema = z.object({
     message: 'Password must be at least 8 characters.',
   }),
   rememberMe: z.boolean(),
-});
+})
 
 const bebasNeue = Bebas_Neue({
   weight: '400',
   style: 'normal',
   subsets: ['latin'],
-});
+})
 
 export default function LoginForm() {
-  const t = useTranslations('login');
-  type FormValues = z.infer<typeof formSchema>;
+  const t = useTranslations('login')
+  type FormValues = z.infer<typeof formSchema>
 
   const form = useForm<FormValues>({
     resolver: zodResolver(formSchema),
@@ -46,12 +46,16 @@ export default function LoginForm() {
       password: 'K3oCs97e',
       rememberMe: true,
     },
-  });
+  })
 
-  const router = useRouter();
+  const router = useRouter()
 
   async function onSubmit(values: FormValues) {
-    router.push('/');
+    router.push('/')
+  }
+
+  if (!t) {
+      return null;
   }
 
   return (
@@ -112,5 +116,5 @@ export default function LoginForm() {
         </Button>
       </form>
     </Form>
-  );
+  )
 }

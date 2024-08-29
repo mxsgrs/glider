@@ -1,33 +1,26 @@
-"use client";
+'use client';
 
-import { useState, useEffect } from "react";
-import { Bebas_Neue } from "next/font/google";
-import LoginForm from "./form";
-
-const bebasNeue = Bebas_Neue({
-  weight: "400",
-  style: "normal",
-  subsets: ["latin"],
-});
+import { useState, useEffect } from 'react'
+import LoginForm from './form'
 
 export default function Content() {
-  const [isWideScreen, setIsWideScreen] = useState(true);
-  const [isImageLoaded, setIsImageLoaded] = useState(false);
+  const [isWideScreen, setIsWideScreen] = useState(true)
+  const [isImageLoaded, setIsImageLoaded] = useState(false)
 
   useEffect(() => {
-    if (typeof window !== "undefined") {
-      setIsWideScreen(window.matchMedia("(min-width: 1024px)").matches);
+    if (typeof window !== 'undefined') {
+      setIsWideScreen(window.matchMedia('(min-width: 1024px)').matches)
     }
 
     if (isWideScreen) {
-      const img = new Image();
-      img.src = "/images/harbor-containers.jpg";
-      img.onload = () => setIsImageLoaded(true);
+      const img = new Image()
+      img.src = '/images/harbor-containers.jpg'
+      img.onload = () => setIsImageLoaded(true)
     }
-  }, [isWideScreen]);
+  }, [isWideScreen])
 
   if (isWideScreen && !isImageLoaded) {
-    return null;
+    return null
   }
 
   return (
@@ -38,5 +31,5 @@ export default function Content() {
         <LoginForm />
       </div>
     </div>
-  );
+  )
 }

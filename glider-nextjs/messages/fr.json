@@ -13,6 +13,13 @@
   },
   "home": {
     "metadataTitle": "Acceuil",
-    "metadataDescription": "Suivi de votre entreprise."
+    "metadataDescription": "Suivi de votre entreprise.",
+    "hello": "Bonjour",
+    "followUpBusiness": "Suivi de votre entreprise.",
+    "revenue": "Revenu",
+    "products": "Produits",
+    "clients": "Clients",
+    "tickets": "Tickets",
+    "thisMonth": "ce mois"
   }
 }

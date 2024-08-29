@@ -13,6 +13,13 @@
   },
   "home": {
     "metadataTitle": "Home",
-    "metadataDescription": "Following up your business."
+    "metadataDescription": "Following up your business.",
+    "hello": "Hello",
+    "followUpBusiness": "Following up your business.",
+    "revenue": "Revenue",
+    "products": "Products",
+    "clients": "Clients",
+    "tickets": "Tickets",
+    "thisMonth": "this month"
   }
 }
