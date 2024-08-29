@@ -1,10 +1,22 @@
 import PageHeader from "@/components/ui/page-header"
 import Dashboard from "./(dashboard)/dashboard"
-import type { Metadata } from "next"
- 
-export const metadata: Metadata = {
-  title: "Home | Glider: Advanced logistics",
-  description: "Following up your business.",
+import type { Metadata } from 'next'
+import { getTranslations } from 'next-intl/server';
+
+interface Params {
+  params: {
+    locale: string;
+  };
+}
+
+export async function generateMetadata({ params: { locale } }: Params): Promise<Metadata> {
+  const thome = await getTranslations({ locale, namespace: 'home' });
+  const twebsite = await getTranslations({ locale, namespace: 'website' });
+
+  return {
+    title: `${thome('metadataTitle')}${twebsite('titleComplement')}`,
+    description: thome('metadataDescription')
+  };
 }
 
 export default function Page() {

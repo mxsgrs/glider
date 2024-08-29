@@ -1,9 +1,18 @@
 {
+  "website": {
+    "titleComplement": " | Glider: Advanced logistics"
+  },
   "login": {
+    "metadataTitle": "Login",
+    "metadataDescription": "Access to your account.",
     "withYouFurther": "With you further.",
     "username": "Username",
     "password": "Password",
     "rememberMe": "Remember me",
     "submit": "Submit"
+  },
+  "home": {
+    "metadataTitle": "Home",
+    "metadataDescription": "Following up your business."
   }
 }
