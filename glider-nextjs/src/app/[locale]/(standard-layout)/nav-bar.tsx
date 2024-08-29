@@ -1,7 +1,7 @@
 import NavMenu from "./nav-menu"
 import { Bebas_Neue } from 'next/font/google';
 import { Avatar, AvatarFallback, AvatarImage } from "@/components/ui/avatar"
-import LocaleSwitcher from "@/components/ui/locale";
+import LocaleSelect from "@/components/ui/locale-select";
 
 const bebasNeue = Bebas_Neue({
   weight: "400",
@@ -16,7 +16,7 @@ export default function NavBar() {
         <div className={`text-3xl ${bebasNeue.className}`}>Glider</div>
         <NavMenu />
         <div className="hidden ml-auto items-center space-x-4 md:flex">
-          <LocaleSwitcher />
+          <LocaleSelect />
           <Avatar>
             <AvatarImage src="https://github.com/shadcn.png" alt="@shadcn" />
             <AvatarFallback>CN</AvatarFallback>
