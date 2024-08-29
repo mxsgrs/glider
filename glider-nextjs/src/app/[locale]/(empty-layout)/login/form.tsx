@@ -58,8 +58,8 @@ export default function LoginForm() {
     <Form {...form}>
       <form onSubmit={form.handleSubmit(onSubmit)} className="w-[350px]">
         <div>
-          <h1 className={`text-8xl -mb-4 ${bebasNeue.className}`}>Glider</h1>
-          <p className="text-muted-foreground pl-1">{t('withYouFurther')}</p>
+          <h1 className={`text-8xl -mb-3 ${bebasNeue.className}`}>Glider</h1>
+          <p className="text-muted-foreground pl-1">{t('advancedLogistics')}</p>
         </div>
         <div className="space-y-4 mt-8">
           <FormField

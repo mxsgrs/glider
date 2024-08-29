@@ -21,7 +21,7 @@ export default function Content() {
 
     if (isWideScreen) {
       const img = new Image();
-      img.src = "/images/white-container.jpg";
+      img.src = "/images/harbor-containers.jpg";
       img.onload = () => setIsImageLoaded(true);
     }
   }, [isWideScreen]);
@@ -32,12 +32,7 @@ export default function Content() {
 
   return (
     <div className="flex h-screen overflow-hidden">
-      <div className="hidden lg:flex lg:w-1/3 xl:w-1/2 bg-[url('/images/white-container.jpg')] bg-cover">
-        <h1
-          className={`hidden xl:block text-8xl text-white font-semibold leading-none tracking-tight p-12 mt-auto md:w-3/5 ${bebasNeue.className}`}
-        >
-          Advanced Logistics
-        </h1>
+      <div className="hidden lg:flex lg:w-1/3 xl:w-1/2 bg-[url('/images/harbor-containers.jpg')] bg-cover">
       </div>
       <div className="flex-1 flex items-center justify-center lg:w-2/3 xl:w-1/2 lg:flex lg:flex-col">
         <LoginForm />
