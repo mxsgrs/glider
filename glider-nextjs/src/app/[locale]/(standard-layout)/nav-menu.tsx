@@ -61,7 +61,7 @@ export function NavMenuContent({ links, useSheetClose = true }: NavMenuContentPr
       <NavigationMenuList className="block space-x-0 space-y-4 md:flex md:space-x-1 md:space-y-0">
         {links.map((link) => (
           <NavigationMenuItem key={link.href}>
-            <LinkWrapper>
+            <LinkWrapper className="focus:outline-none active:outline-none">
               <NavigationMenuLink href={link.href} className="text-2xl sm:text-base sm:px-2 font-semibold">
                 {link.label}
               </NavigationMenuLink>
