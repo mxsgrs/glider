@@ -1,7 +1,6 @@
 "use client"
 
 import * as React from "react"
-import Link from "next/link"
 import { Menu } from 'lucide-react';
 
 import {
@@ -9,7 +8,6 @@ import {
   NavigationMenuItem,
   NavigationMenuLink,
   NavigationMenuList,
-  navigationMenuTriggerStyle,
 } from "@/components/ui/navigation-menu"
 import {
   Sheet,
@@ -18,23 +16,31 @@ import {
   SheetHeader,
   SheetTitle,
   SheetTrigger,
+  SheetClose,
 } from "@/components/ui/sheet"
 
 export default function NavMenu() {
+  const links = [
+    { href: "/payments", label: "Payments" },
+    { href: "/profile", label: "Profile" },
+  ];
+
   return (
     <div className="ml-auto md:ml-0">
       <div className="hidden md:block px-4">
-        <NavMenuContent />
+        <NavMenuContent useSheetClose={false} links={links} />
       </div>
       <div className="md:hidden px-4">
         <Sheet>
-          <SheetTrigger><Menu /></SheetTrigger>
+          <SheetTrigger asChild>
+            <Menu />
+          </SheetTrigger>
           <SheetContent>
             <SheetHeader className="text-left space-y-0">
               <SheetTitle>Menu</SheetTitle>
               <SheetDescription>Navigate through the app.</SheetDescription>
             </SheetHeader>
-            <NavMenuContent />
+            <NavMenuContent useSheetClose={true} links={links} />
           </SheetContent>
         </Sheet>
       </div>
@@ -42,29 +48,27 @@ export default function NavMenu() {
   )
 }
 
-export function NavMenuContent() {
+interface NavMenuContentProps {
+  links: { href: string; label: string }[];
+  useSheetClose?: boolean;
+}
+
+export function NavMenuContent({ links, useSheetClose = true }: NavMenuContentProps) {
+  const LinkWrapper = useSheetClose ? SheetClose : React.Fragment;
+
   return (
     <NavigationMenu className="mt-4 md:mt-0">
       <NavigationMenuList className="block space-x-0 space-y-4 md:flex md:space-x-1 md:space-y-0">
-        <NavigationMenuItem>
-          <Link href="/data" legacyBehavior passHref>
-            <NavigationMenuLink className={navigationMenuTriggerStyle()}>
-              <div className="text-2xl md:text-sm">
-                Data
-              </div>
-            </NavigationMenuLink>
-          </Link>
-        </NavigationMenuItem>
-        <NavigationMenuItem>
-          <Link href="/profile" legacyBehavior passHref>
-            <NavigationMenuLink className={navigationMenuTriggerStyle()}>
-              <div className="text-2xl md:text-sm">
-                Profile
-              </div>
-            </NavigationMenuLink>
-          </Link>
-        </NavigationMenuItem>
+        {links.map((link) => (
+          <NavigationMenuItem key={link.href}>
+            <LinkWrapper>
+              <NavigationMenuLink href={link.href} className="text-2xl sm:text-base sm:px-2 font-semibold">
+                {link.label}
+              </NavigationMenuLink>
+            </LinkWrapper>
+          </NavigationMenuItem>
+        ))}
       </NavigationMenuList>
     </NavigationMenu>
-  )
+  );
 }
