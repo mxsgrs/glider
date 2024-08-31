@@ -54,21 +54,33 @@ interface NavMenuContentProps {
 }
 
 export function NavMenuContent({ links, useSheetClose = true }: NavMenuContentProps) {
-  const LinkWrapper = useSheetClose ? SheetClose : React.Fragment;
-
   return (
     <NavigationMenu className="mt-4 md:mt-0">
       <NavigationMenuList className="block space-x-0 space-y-4 md:flex md:space-x-1 md:space-y-0">
         {links.map((link) => (
           <NavigationMenuItem key={link.href}>
-            <LinkWrapper className="focus:outline-none active:outline-none">
-              <NavigationMenuLink href={link.href} className="text-2xl sm:text-base sm:px-2 font-semibold">
-                {link.label}
-              </NavigationMenuLink>
-            </LinkWrapper>
+            {useSheetClose ? (
+              <SheetClose className="focus:outline-none active:outline-none">
+                <NavMenuCustomLink link={link} />
+              </SheetClose>
+            ) : (
+              <NavMenuCustomLink link={link} />
+            )}
           </NavigationMenuItem>
         ))}
       </NavigationMenuList>
     </NavigationMenu>
+  );
+}
+
+interface NavMenuCustomLinkProps {
+  link: { href: string; label: string };
+}
+
+export function NavMenuCustomLink({ link }: NavMenuCustomLinkProps) {
+  return (
+    <NavigationMenuLink href={link.href} className="text-2xl sm:text-base sm:px-2 font-semibold">
+      {link.label}
+    </NavigationMenuLink>
   );
 }
