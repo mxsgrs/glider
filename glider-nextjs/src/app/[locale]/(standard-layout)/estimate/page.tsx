@@ -10,10 +10,14 @@ export async function generateMetadata({ params: { locale } }: LocaleParams): Pr
 }
 
 // Page
-import Content from "./content";
+import PageHeader from "@/components/ui/page-header";
+import Pdf from "./pdf";
 
 export default function Page() {
   return (
-    <Content />
+    <div>
+      <PageHeader title="Estimate online" subtitle="Create an estimate for your business." />
+      <Pdf />
+    </div>
   )
 }

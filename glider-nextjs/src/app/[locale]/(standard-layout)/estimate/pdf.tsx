@@ -1,10 +1,8 @@
 "use client"
 
-import PageHeader from "@/components/ui/page-header";
 import { useTranslations } from "next-intl"
 
-
-export default function Content() {
+export default function Pdf() {
     const t = useTranslations('estimate');
   
     const fetchData = async () => {
@@ -27,7 +25,6 @@ export default function Content() {
     return (
       <div>
         <button onClick={fetchData}>Fetch Data</button>
-        <PageHeader title="Estimate online" subtitle="Create an estimate for your business." />
       </div>
     )
   }
