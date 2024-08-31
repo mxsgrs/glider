@@ -6,6 +6,10 @@
     "en": "English",
     "fr": "French"
   },
+  "estimate": {
+    "metadataTitle": "Estimate",
+    "metadataDescription": "Create an estimate for your business."
+  },
   "login": {
     "metadataTitle": "Login",
     "metadataDescription": "Access to your account.",
@@ -15,8 +19,8 @@
     "rememberMe": "Remember me",
     "submit": "Submit"
   },
-  "home": {
-    "metadataTitle": "Home",
+  "dashboard": {
+    "metadataTitle": "Dashboard",
     "metadataDescription": "Following up your business.",
     "hello": "Hello",
     "followUpBusiness": "Following up your business.",
@@ -31,5 +35,9 @@
     "browsers": "Browsers",
     "visitors": "visitors",
     "invoices": "Invoices"
+  },
+  "payments": {
+    "metadataTitle": "Payments",
+    "metadataDescription": "Check your client payments."
   }
 }

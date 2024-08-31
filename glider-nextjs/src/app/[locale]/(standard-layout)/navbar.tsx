@@ -14,7 +14,7 @@ export default function Navbar() {
   return (
     <div className="border-b">
       <div className="flex h-16 items-center px-4">
-        <Link className={`text-3xl ${bebasNeue.className}`} href="/">Glider</Link>
+        <Link className={`text-3xl ${bebasNeue.className}`} href="/dashboard">Glider</Link>
         <NavMenu />
         <div className="hidden ml-auto items-center space-x-4 md:flex">
           <LocaleSelect />

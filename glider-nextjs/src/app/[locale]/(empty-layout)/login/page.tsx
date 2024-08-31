@@ -1,23 +1,16 @@
+// Metadata
+import type { Metadata } from "next"
+import AppMetadata from "@/components/ui/app-metadata";
+import { LocaleParams } from "@/types/locale-params";
+
+const page = 'login';
+
+export async function generateMetadata({ params: { locale } }: LocaleParams): Promise<Metadata> {
+  return await AppMetadata({ params: { locale, page } });
+}
+
+// Page
 import Content from './content';
-import type { Metadata } from 'next'
-import { getTranslations } from 'next-intl/server';
-
-interface Params {
-  params: {
-    locale: string;
-  };
-}
-
-export async function generateMetadata({ params: { locale } }: Params): Promise<Metadata> {
-  const tlogin = await getTranslations({ locale, namespace: 'login' });
-  const twebsite = await getTranslations({ locale, namespace: 'website' });
-
-  return {
-    title: `${tlogin('metadataTitle')}${twebsite('titleComplement')}`,
-    description: tlogin('metadataDescription')
-  };
-}
-
 
 export default function Page() {
   return (

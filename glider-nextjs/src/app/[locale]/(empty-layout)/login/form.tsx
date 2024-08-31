@@ -51,7 +51,7 @@ export default function LoginForm() {
   const router = useRouter()
 
   async function onSubmit(values: FormValues) {
-    router.push('/')
+    router.push('/dashboard')
   }
 
   return (

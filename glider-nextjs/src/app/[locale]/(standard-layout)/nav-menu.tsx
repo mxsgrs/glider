@@ -22,7 +22,7 @@ import {
 export default function NavMenu() {
   const links = [
     { href: "/payments", label: "Payments" },
-    { href: "/profile", label: "Profile" },
+    { href: "/estimate", label: "Estimate" },
   ];
 
   return (

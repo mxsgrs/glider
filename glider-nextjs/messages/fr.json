@@ -6,6 +6,10 @@
     "en": "Anglais",
     "fr": "Français"
   },
+  "estimate": {
+    "metadataTitle": "Devis",
+    "metadataDescription": "Créez un devis pour votre business."
+  },
   "login": {
     "metadataTitle": "Login",
     "metadataDescription": "Accédez à votre compte.",
@@ -15,8 +19,8 @@
     "rememberMe": "Se rappeler de moi",
     "submit": "Soumettre"
   },
-  "home": {
-    "metadataTitle": "Accueil",
+  "dashboard": {
+    "metadataTitle": "Dashboard",
     "metadataDescription": "Suivi de votre entreprise.",
     "hello": "Bonjour",
     "followUpBusiness": "Suivi de votre entreprise.",
@@ -31,5 +35,9 @@
     "browsers": "Navigateurs",
     "visitors": "visiteurs",
     "invoices": "Factures"
+  },
+  "payments": {
+    "metadataTitle": "Paiements",
+    "metadataDescription": "Visualisez le paiement de vos clients."
   }
 }
