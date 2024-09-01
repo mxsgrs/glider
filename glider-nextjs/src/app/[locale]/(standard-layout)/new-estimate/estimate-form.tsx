@@ -1,7 +1,7 @@
 "use client"
 
 import { saveAs } from 'file-saver';
-import { pdf } from '@react-pdf/renderer';
+import { pdf, PDFViewer } from '@react-pdf/renderer';
 import { zodResolver } from "@hookform/resolvers/zod"
 import { useForm } from "react-hook-form"
 import { z } from "zod"
@@ -178,160 +178,227 @@ export default function EstimateForm() {
     }
 
     return (
-        <div className="px-4 mt-6">
-            <Form {...form}>
-                <form onSubmit={form.handleSubmit(onSubmit)} className="space-y-8">
-                    {/* Estimate metadata */}
-                    <div className="max-w-md space-y-4 p-1">
-                        <FormField
-                            control={form.control}
-                            name="estimateRef"
-                            render={({ field }) => (
-                                <FormItem>
-                                    <FormLabel>Estimate reference</FormLabel>
-                                    <FormControl>
-                                        <Input placeholder="Estimate reference" {...field} />
-                                    </FormControl>
-                                </FormItem>
-                            )}
-                        />
+        <div className="flex flex-row my-6">
+            <div className="px-4 lg:min-w-[390px]">
+                <Form {...form}>
+                    <form onSubmit={form.handleSubmit(onSubmit)} className="space-y-8">
+                        {/* Estimate metadata */}
+                        <div className="max-w-md space-y-4 p-1">
+                            <FormField
+                                control={form.control}
+                                name="estimateRef"
+                                render={({ field }) => (
+                                    <FormItem>
+                                        <FormLabel>Estimate reference</FormLabel>
+                                        <FormControl>
+                                            <Input placeholder="Estimate reference" {...field} />
+                                        </FormControl>
+                                    </FormItem>
+                                )}
+                            />
 
-                        <FormField
-                            control={form.control}
-                            name="subjectMatter"
-                            render={({ field }) => (
-                                <FormItem>
-                                    <FormLabel>Subject matter</FormLabel>
-                                    <FormControl>
-                                        <Input placeholder="Subject matter" {...field} />
-                                    </FormControl>
-                                </FormItem>
-                            )}
-                        />
+                            <FormField
+                                control={form.control}
+                                name="subjectMatter"
+                                render={({ field }) => (
+                                    <FormItem>
+                                        <FormLabel>Subject matter</FormLabel>
+                                        <FormControl>
+                                            <Input placeholder="Subject matter" {...field} />
+                                        </FormControl>
+                                    </FormItem>
+                                )}
+                            />
 
-                        <FormField
-                            control={form.control}
-                            name="expiracyDate"
-                            render={({ }) => (
-                                <DatePicker name="expiracyDate" control={form.control} label='Expiracy date' />
-                            )}
-                        />
-                    </div>
+                            <FormField
+                                control={form.control}
+                                name="expiracyDate"
+                                render={({ }) => (
+                                    <DatePicker name="expiracyDate" control={form.control} label='Expiracy date' />
+                                )}
+                            />
+                        </div>
+                        {/* Issuer and recipient */}
+                        <div className="space-y-2">
+                            <h2 className="text-2xl font-semibold px-4">
+                                Companies
+                            </h2>
+                            <Tabs defaultValue="issuer">
+                                <TabsList className="m-1 mx-2">
+                                    <TabsTrigger value="issuer">Issuer</TabsTrigger>
+                                    <TabsTrigger value="recipient">Recipient</TabsTrigger>
+                                </TabsList>
 
-                    {/* Issuer and recipient */}
-                    <Tabs defaultValue="issuer">
-                        <TabsList>
-                            <TabsTrigger value="issuer">Issuer</TabsTrigger>
-                            <TabsTrigger value="recipient">Recipient</TabsTrigger>
-                        </TabsList>
+                                {form.watch('estimateCompany').map((company, index) => (
+                                    <TabsContent className="max-w-md space-y-4 p-1"
+                                        value={company.estimateCompanyParty.toLowerCase()}
+                                        key={company.estimateCompanyId}>
 
-                        {form.watch('estimateCompany').map((company, index) => (
-                            <TabsContent className="max-w-md space-y-4 p-1"
-                                value={company.estimateCompanyParty.toLowerCase()}
-                                key={company.estimateCompanyId}>
+                                        <FormField
+                                            control={form.control}
+                                            name={`estimateCompany.${index}.businessName`}
+                                            render={({ field }) => (
+                                                <FormItem>
+                                                    <FormLabel>Business Name</FormLabel>
+                                                    <FormControl>
+                                                        <Input placeholder="Business Name" {...field} />
+                                                    </FormControl>
+                                                </FormItem>
+                                            )}
+                                        />
 
-                                <h2 className="text-2xl font-semibold">
-                                    {company.estimateCompanyParty}
-                                </h2>
+                                        <FormField
+                                            control={form.control}
+                                            name={`estimateCompany.${index}.businessAddress`}
+                                            render={({ field }) => (
+                                                <FormItem>
+                                                    <FormLabel>Business Address</FormLabel>
+                                                    <FormControl>
+                                                        <Input placeholder="Business Address" {...field} />
+                                                    </FormControl>
+                                                </FormItem>
+                                            )}
+                                        />
 
-                                <FormField
-                                    control={form.control}
-                                    name={`estimateCompany.${index}.businessName`}
-                                    render={({ field }) => (
-                                        <FormItem>
-                                            <FormLabel>Business Name</FormLabel>
-                                            <FormControl>
-                                                <Input placeholder="Business Name" {...field} />
-                                            </FormControl>
-                                        </FormItem>
-                                    )}
-                                />
+                                        <FormField
+                                            control={form.control}
+                                            name={`estimateCompany.${index}.phone`}
+                                            render={({ field }) => (
+                                                <FormItem>
+                                                    <FormLabel>Phone</FormLabel>
+                                                    <FormControl>
+                                                        <Input placeholder="Phone" {...field} />
+                                                    </FormControl>
+                                                </FormItem>
+                                            )}
+                                        />
 
-                                <FormField
-                                    control={form.control}
-                                    name={`estimateCompany.${index}.businessAddress`}
-                                    render={({ field }) => (
-                                        <FormItem>
-                                            <FormLabel>Business Address</FormLabel>
-                                            <FormControl>
-                                                <Input placeholder="Business Address" {...field} />
-                                            </FormControl>
-                                        </FormItem>
-                                    )}
-                                />
+                                        <FormField
+                                            control={form.control}
+                                            name={`estimateCompany.${index}.email`}
+                                            render={({ field }) => (
+                                                <FormItem>
+                                                    <FormLabel>Email</FormLabel>
+                                                    <FormControl>
+                                                        <Input placeholder="Email" {...field} />
+                                                    </FormControl>
+                                                </FormItem>
+                                            )}
+                                        />
 
-                                <FormField
-                                    control={form.control}
-                                    name={`estimateCompany.${index}.phone`}
-                                    render={({ field }) => (
-                                        <FormItem>
-                                            <FormLabel>Phone</FormLabel>
-                                            <FormControl>
-                                                <Input placeholder="Phone" {...field} />
-                                            </FormControl>
-                                        </FormItem>
-                                    )}
-                                />
+                                        <FormField
+                                            control={form.control}
+                                            name={`estimateCompany.${index}.taxNumber`}
+                                            render={({ field }) => (
+                                                <FormItem>
+                                                    <FormLabel>Tax Number</FormLabel>
+                                                    <FormControl>
+                                                        <Input placeholder="Tax Number" {...field} />
+                                                    </FormControl>
+                                                </FormItem>
+                                            )}
+                                        />
 
-                                <FormField
-                                    control={form.control}
-                                    name={`estimateCompany.${index}.email`}
-                                    render={({ field }) => (
-                                        <FormItem>
-                                            <FormLabel>Email</FormLabel>
-                                            <FormControl>
-                                                <Input placeholder="Email" {...field} />
-                                            </FormControl>
-                                        </FormItem>
-                                    )}
-                                />
+                                        <FormField
+                                            control={form.control}
+                                            name={`estimateCompany.${index}.siretNumber`}
+                                            render={({ field }) => (
+                                                <FormItem>
+                                                    <FormLabel>SIRET Number</FormLabel>
+                                                    <FormControl>
+                                                        <Input placeholder="SIRET Number" {...field} />
+                                                    </FormControl>
+                                                </FormItem>
+                                            )}
+                                        />
 
-                                <FormField
-                                    control={form.control}
-                                    name={`estimateCompany.${index}.taxNumber`}
-                                    render={({ field }) => (
-                                        <FormItem>
-                                            <FormLabel>Tax Number</FormLabel>
-                                            <FormControl>
-                                                <Input placeholder="Tax Number" {...field} />
-                                            </FormControl>
-                                        </FormItem>
-                                    )}
-                                />
+                                        <FormField
+                                            control={form.control}
+                                            name={`estimateCompany.${index}.sirenNumber`}
+                                            render={({ field }) => (
+                                                <FormItem>
+                                                    <FormLabel>SIREN Number</FormLabel>
+                                                    <FormControl>
+                                                        <Input placeholder="SIREN Number" {...field} />
+                                                    </FormControl>
+                                                </FormItem>
+                                            )}
+                                        />
 
-                                <FormField
-                                    control={form.control}
-                                    name={`estimateCompany.${index}.siretNumber`}
-                                    render={({ field }) => (
-                                        <FormItem>
-                                            <FormLabel>SIRET Number</FormLabel>
-                                            <FormControl>
-                                                <Input placeholder="SIRET Number" {...field} />
-                                            </FormControl>
-                                        </FormItem>
-                                    )}
-                                />
+                                    </TabsContent>
+                                ))}
 
-                                <FormField
-                                    control={form.control}
-                                    name={`estimateCompany.${index}.sirenNumber`}
-                                    render={({ field }) => (
-                                        <FormItem>
-                                            <FormLabel>SIREN Number</FormLabel>
-                                            <FormControl>
-                                                <Input placeholder="SIREN Number" {...field} />
-                                            </FormControl>
-                                        </FormItem>
-                                    )}
-                                />
+                            </Tabs>
+                        </div>
+                        {/* Details */}
+                        <div className="space-y-2">
+                            <h2 className="text-2xl font-semibold px-4">
+                                Details
+                            </h2>
+                            <Tabs defaultValue="0">
+                                <TabsList className="m-1 mx-2">
+                                    <TabsTrigger value="0">0</TabsTrigger>
+                                    <TabsTrigger value="1">1</TabsTrigger>
+                                </TabsList>
 
-                            </TabsContent>
-                        ))}
+                                {form.watch('estimateDetail').map((detail, index) => (
+                                    <TabsContent className="max-w-md space-y-4 p-1"
+                                        value={index.toString()}
+                                        key={index}>
 
-                    </Tabs>
-                    <Button type="submit">Submit</Button>
-                </form>
-            </Form>
+                                        <FormField
+                                            control={form.control}
+                                            name={`estimateDetail.${index}.rawDescription`}
+                                            render={({ field }) => (
+                                                <FormItem>
+                                                    <FormLabel>Description</FormLabel>
+                                                    <FormControl>
+                                                        <Input placeholder="Description" {...field} />
+                                                    </FormControl>
+                                                </FormItem>
+                                            )}
+                                        />
+
+                                        <FormField
+                                            control={form.control}
+                                            name={`estimateDetail.${index}.quantity`}
+                                            render={({ field }) => (
+                                                <FormItem>
+                                                    <FormLabel>Quantity</FormLabel>
+                                                    <FormControl>
+                                                        <Input type="number" {...field} />
+                                                    </FormControl>
+                                                </FormItem>
+                                            )}
+                                        />
+
+                                        <FormField
+                                            control={form.control}
+                                            name={`estimateDetail.${index}.unitPrice`}
+                                            render={({ field }) => (
+                                                <FormItem>
+                                                    <FormLabel>Unit price</FormLabel>
+                                                    <FormControl>
+                                                        <Input type="number" {...field} />
+                                                    </FormControl>
+                                                </FormItem>
+                                            )}
+                                        />
+
+                                    </TabsContent>
+                                ))}
+
+                            </Tabs>
+                        </div>
+                        <Button type="submit">Submit</Button>
+                    </form>
+                </Form>
+            </div>
+            <div className="">
+                <PDFViewer width={799} height={1190}>
+                    <EstimatePdf estimate={form.getValues()} />
+                </PDFViewer>
+            </div>
         </div>
     )
 }
