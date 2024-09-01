@@ -67,7 +67,7 @@ export default function LoginForm() {
             name="username"
             render={({ field }) => (
               <FormItem>
-                <FormLabel className="pl-2">{t('username')}</FormLabel>
+                <FormLabel>{t('username')}</FormLabel>
                 <FormControl>
                   <Input placeholder={t('username')} {...field} />
                 </FormControl>
@@ -80,7 +80,7 @@ export default function LoginForm() {
             name="password"
             render={({ field }) => (
               <FormItem>
-                <FormLabel className="pl-2">{t('password')}</FormLabel>
+                <FormLabel>{t('password')}</FormLabel>
                 <FormControl>
                   <Input type="password" placeholder={t('password')} {...field} />
                 </FormControl>
@@ -99,7 +99,7 @@ export default function LoginForm() {
                     onCheckedChange={field.onChange}
                   />
                 </FormControl>
-                <FormLabel className="ml-2 text-muted-foreground">
+                <FormLabel>
                   {t('rememberMe')}
                 </FormLabel>
                 <FormMessage />

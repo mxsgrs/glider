@@ -179,7 +179,7 @@ export default function EstimateForm() {
                         name="subjectMatter"
                         render={({ field }) => (
                             <FormItem>
-                                <FormLabel className="pl-2">Subject Matter</FormLabel>
+                                <FormLabel>Subject Matter</FormLabel>
                                 <FormControl>
                                     <Input placeholder="Subject matter" {...field} />
                                 </FormControl>
@@ -204,7 +204,7 @@ export default function EstimateForm() {
                                     name={`estimateCompany.${index}.businessName`}
                                     render={({ field }) => (
                                         <FormItem>
-                                            <FormLabel className="pl-2">Business Name</FormLabel>
+                                            <FormLabel>Business Name</FormLabel>
                                             <FormControl>
                                                 <Input placeholder="Business Name" {...field} />
                                             </FormControl>
@@ -217,7 +217,7 @@ export default function EstimateForm() {
                                     name={`estimateCompany.${index}.businessAddress`}
                                     render={({ field }) => (
                                         <FormItem>
-                                            <FormLabel className="pl-2">Business Address</FormLabel>
+                                            <FormLabel>Business Address</FormLabel>
                                             <FormControl>
                                                 <Input placeholder="Business Address" {...field} />
                                             </FormControl>
@@ -230,7 +230,7 @@ export default function EstimateForm() {
                                     name={`estimateCompany.${index}.phone`}
                                     render={({ field }) => (
                                         <FormItem>
-                                            <FormLabel className="pl-2">Phone</FormLabel>
+                                            <FormLabel>Phone</FormLabel>
                                             <FormControl>
                                                 <Input placeholder="Phone" {...field} />
                                             </FormControl>
@@ -243,7 +243,7 @@ export default function EstimateForm() {
                                     name={`estimateCompany.${index}.email`}
                                     render={({ field }) => (
                                         <FormItem>
-                                            <FormLabel className="pl-2">Email</FormLabel>
+                                            <FormLabel>Email</FormLabel>
                                             <FormControl>
                                                 <Input placeholder="Email" {...field} />
                                             </FormControl>
@@ -256,7 +256,7 @@ export default function EstimateForm() {
                                     name={`estimateCompany.${index}.taxNumber`}
                                     render={({ field }) => (
                                         <FormItem>
-                                            <FormLabel className="pl-2">Tax Number</FormLabel>
+                                            <FormLabel>Tax Number</FormLabel>
                                             <FormControl>
                                                 <Input placeholder="Tax Number" {...field} />
                                             </FormControl>
@@ -269,7 +269,7 @@ export default function EstimateForm() {
                                     name={`estimateCompany.${index}.siretNumber`}
                                     render={({ field }) => (
                                         <FormItem>
-                                            <FormLabel className="pl-2">SIRET Number</FormLabel>
+                                            <FormLabel>SIRET Number</FormLabel>
                                             <FormControl>
                                                 <Input placeholder="SIRET Number" {...field} />
                                             </FormControl>
@@ -282,7 +282,7 @@ export default function EstimateForm() {
                                     name={`estimateCompany.${index}.sirenNumber`}
                                     render={({ field }) => (
                                         <FormItem>
-                                            <FormLabel className="pl-2">SIREN Number</FormLabel>
+                                            <FormLabel>SIREN Number</FormLabel>
                                             <FormControl>
                                                 <Input placeholder="SIREN Number" {...field} />
                                             </FormControl>
