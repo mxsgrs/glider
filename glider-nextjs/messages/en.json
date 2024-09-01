@@ -35,9 +35,5 @@
     "browsers": "Browsers",
     "visitors": "visitors",
     "invoices": "Invoices"
-  },
-  "payments": {
-    "metadataTitle": "Payments",
-    "metadataDescription": "Check your client payments."
   }
 }

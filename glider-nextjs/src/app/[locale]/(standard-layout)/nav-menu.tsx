@@ -21,7 +21,6 @@ import {
 
 export default function NavMenu() {
   const links = [
-    { href: "/payments", label: "Payments" },
     { href: "/new-estimate", label: "New estimate" },
   ];
 

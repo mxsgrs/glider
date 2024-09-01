@@ -35,9 +35,5 @@
     "browsers": "Navigateurs",
     "visitors": "visiteurs",
     "invoices": "Factures"
-  },
-  "payments": {
-    "metadataTitle": "Paiements",
-    "metadataDescription": "Visualisez le paiement de vos clients."
   }
 }
