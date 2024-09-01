@@ -3,7 +3,7 @@
 import { saveAs } from 'file-saver';
 import { pdf, PDFViewer } from '@react-pdf/renderer';
 import { zodResolver } from "@hookform/resolvers/zod"
-import { useForm } from "react-hook-form"
+import { useForm, useFieldArray, Controller } from "react-hook-form"
 import { z } from "zod"
 
 import { Input } from "@/components/ui/input"
@@ -69,7 +69,7 @@ export default function EstimateForm() {
     type FormValues = z.infer<typeof estimateSchema>
 
     // Default values
-    const form = useForm<FormValues>({
+    var form = useForm<FormValues>({
         resolver: zodResolver(estimateSchema),
         defaultValues: {
             estimateId: 1,
@@ -131,6 +131,27 @@ export default function EstimateForm() {
             ],
         },
     });
+
+    const { control } = form;
+
+    const { fields, append } = useFieldArray({
+        control,
+        name: "estimateDetail"
+    });
+
+    const addDetail = () => {
+        if (form.watch('estimateDetail').length < 8) {
+            append({
+                estimateDetailId: 0,
+                estimateId: 1,
+                rawDescription: '',
+                quantity: 0,
+                unitPrice: 0,
+                creationDate: new Date(),
+                updateDate: new Date(),
+            })
+        }
+    };
 
     async function onSubmit(values: FormValues) {
         const estimate: Estimate = {
@@ -218,7 +239,7 @@ export default function EstimateForm() {
                                 )}
                             />
                         </div>
-                        
+
                         {/* Issuer and recipient */}
                         <div className="space-y-2">
                             <h2 className="text-2xl font-semibold px-4">
@@ -339,9 +360,10 @@ export default function EstimateForm() {
                             </h2>
                             <Tabs defaultValue="0">
                                 <TabsList className="m-1 mx-2">
-                                {form.watch('estimateDetail').map((detail, index) => (
-                                    <TabsTrigger value={index.toString()} key={index}>{index}</TabsTrigger>
-                                ))}
+                                    {form.watch('estimateDetail').map((detail, index) => (
+                                        <TabsTrigger value={index.toString()} key={index}>{index}</TabsTrigger>
+                                    ))}
+                                    <Button className="p-2 px-4 ml-2" type="button" onClick={addDetail}>+</Button>
                                 </TabsList>
 
                                 {form.watch('estimateDetail').map((detail, index) => (

@@ -19,7 +19,7 @@ export const DetailTable: React.FC<DetailTableProps> = ({ data }) => {
                 <View key={row.estimateDetailId} style={styles.row} wrap={false}>
                     <Text style={styles.col1}>{row.rawDescription}</Text>
                     <Text style={styles.col2}>{row.quantity}</Text>
-                    <Text style={styles.col3}>{row.unitPrice.toFixed(2)}</Text>
+                    <Text style={styles.col3}>{Number(row.unitPrice).toFixed(2)}</Text>
                     <Text style={styles.col4}>{(row.quantity*row.unitPrice).toFixed(2)}</Text>
                 </View>
             ))}
