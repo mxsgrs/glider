@@ -10,7 +10,7 @@ const bebasNeue = Bebas_Neue({
   subsets: ['latin']
 });
 
-export default function Navbar() {
+export default function NavBar() {
   return (
     <div className="border-b">
       <div className="flex h-16 items-center px-4">

@@ -1,5 +1,5 @@
 import { Inter } from "next/font/google"
-import Navbar from "./navbar"
+import NavBar from "./nav-bar"
 import "@/app/globals.css"
 
 import { NextIntlClientProvider } from "next-intl";
@@ -20,7 +20,7 @@ export default async function RootLayout({
     <html lang={locale}>
       <body className={inter.className}>
         <NextIntlClientProvider messages={messages}>
-          <Navbar />
+          <NavBar />
           <main>
             <div className="max-w-screen-2xl mx-auto">
               {children}
