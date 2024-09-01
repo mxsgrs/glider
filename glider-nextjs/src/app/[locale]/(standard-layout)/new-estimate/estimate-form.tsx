@@ -415,11 +415,11 @@ export default function EstimateForm() {
 
                             </Tabs>
                         </div>
-                        <Button type="submit">Submit</Button>
+                        <Button className="m-1" type="submit">Submit</Button>
                     </form>
                 </Form>
             </div>
-            <div className="">
+            <div className="hidden lg:block">
                 <PDFViewer width={799} height={1190}>
                     <EstimatePdf estimate={form.getValues()} />
                 </PDFViewer>
