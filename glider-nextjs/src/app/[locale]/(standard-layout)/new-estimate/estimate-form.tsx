@@ -218,6 +218,7 @@ export default function EstimateForm() {
                                 )}
                             />
                         </div>
+                        
                         {/* Issuer and recipient */}
                         <div className="space-y-2">
                             <h2 className="text-2xl font-semibold px-4">
@@ -330,6 +331,7 @@ export default function EstimateForm() {
 
                             </Tabs>
                         </div>
+
                         {/* Details */}
                         <div className="space-y-2">
                             <h2 className="text-2xl font-semibold px-4">
@@ -337,8 +339,9 @@ export default function EstimateForm() {
                             </h2>
                             <Tabs defaultValue="0">
                                 <TabsList className="m-1 mx-2">
-                                    <TabsTrigger value="0">0</TabsTrigger>
-                                    <TabsTrigger value="1">1</TabsTrigger>
+                                {form.watch('estimateDetail').map((detail, index) => (
+                                    <TabsTrigger value={index.toString()}>{index}</TabsTrigger>
+                                ))}
                                 </TabsList>
 
                                 {form.watch('estimateDetail').map((detail, index) => (

@@ -16,7 +16,7 @@ import EstimateForm from "./estimate-form";
 export default function Page() {
   return (
     <div className="max-w-screen-2xl mx-auto">
-      <PageHeader title="Estimate online" subtitle="Create an estimate for your business." />
+      <PageHeader title="New estimate online" subtitle="Create an estimate for your business." />
       <EstimateForm />
     </div>
   )
