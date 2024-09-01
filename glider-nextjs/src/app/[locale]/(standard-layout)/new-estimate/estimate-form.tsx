@@ -340,7 +340,7 @@ export default function EstimateForm() {
                             <Tabs defaultValue="0">
                                 <TabsList className="m-1 mx-2">
                                 {form.watch('estimateDetail').map((detail, index) => (
-                                    <TabsTrigger value={index.toString()}>{index}</TabsTrigger>
+                                    <TabsTrigger value={index.toString()} key={index}>{index}</TabsTrigger>
                                 ))}
                                 </TabsList>
 
