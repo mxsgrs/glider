@@ -25,6 +25,8 @@ import {
 import { Estimate } from '@/types/estimate';
 import { EstimatePdf } from './estimate-pdf';
 
+import DatePicker from './custom-date-picker';
+
 // Schema
 const estimateDetailSchema = z.object({
     estimateDetailId: z.number(),
@@ -53,10 +55,12 @@ const estimateCompanySchema = z.object({
 
 const estimateSchema = z.object({
     estimateId: z.number(),
+    estimateRef: z.string(),
     userCredentialsId: z.number(),
     subjectMatter: z.string(),
     creationDate: z.date().optional(),
     updateDate: z.date().optional(),
+    expiracyDate: z.date().optional(),
     estimateDetail: z.array(estimateDetailSchema),
     estimateCompany: z.array(estimateCompanySchema),
 });
@@ -69,10 +73,12 @@ export default function EstimateForm() {
         resolver: zodResolver(estimateSchema),
         defaultValues: {
             estimateId: 1,
+            estimateRef: "2394729",
             userCredentialsId: 1001,
             subjectMatter: 'Web Development Project',
             creationDate: new Date(),
             updateDate: new Date(),
+            expiracyDate: new Date(),
             estimateDetail: [
                 {
                     estimateDetailId: 1,
@@ -129,10 +135,12 @@ export default function EstimateForm() {
     async function onSubmit(values: FormValues) {
         const estimate: Estimate = {
             estimateId: values.estimateId,
+            estimateRef: values.estimateRef,
             userCredentialsId: values.userCredentialsId,
             subjectMatter: values.subjectMatter,
             creationDate: values.creationDate,
             updateDate: values.updateDate,
+            expiracyDate: values.expiracyDate,
             estimateCompany: values.estimateCompany.map((company, index) => ({
                 estimateCompanyId: company.estimateCompanyId,
                 estimateId: values.estimateId,
@@ -174,27 +182,54 @@ export default function EstimateForm() {
             <Form {...form}>
                 <form onSubmit={form.handleSubmit(onSubmit)} className="space-y-8">
                     {/* Estimate metadata */}
-                    <FormField
-                        control={form.control}
-                        name="subjectMatter"
-                        render={({ field }) => (
-                            <FormItem>
-                                <FormLabel>Subject Matter</FormLabel>
-                                <FormControl>
-                                    <Input placeholder="Subject matter" {...field} />
-                                </FormControl>
-                            </FormItem>
-                        )}
-                    />
+                    <div className="max-w-md space-y-4 p-1">
+                        <FormField
+                            control={form.control}
+                            name="estimateRef"
+                            render={({ field }) => (
+                                <FormItem>
+                                    <FormLabel>Estimate reference</FormLabel>
+                                    <FormControl>
+                                        <Input placeholder="Estimate reference" {...field} />
+                                    </FormControl>
+                                </FormItem>
+                            )}
+                        />
+
+                        <FormField
+                            control={form.control}
+                            name="subjectMatter"
+                            render={({ field }) => (
+                                <FormItem>
+                                    <FormLabel>Subject matter</FormLabel>
+                                    <FormControl>
+                                        <Input placeholder="Subject matter" {...field} />
+                                    </FormControl>
+                                </FormItem>
+                            )}
+                        />
+
+                        <FormField
+                            control={form.control}
+                            name="expiracyDate"
+                            render={({ }) => (
+                                <DatePicker name="expiracyDate" control={form.control} label='Expiracy date' />
+                            )}
+                        />
+                    </div>
 
                     {/* Issuer and recipient */}
-                    <Tabs defaultValue="Issuer" className="">
+                    <Tabs defaultValue="issuer">
                         <TabsList>
-                            <TabsTrigger value="Issuer">Issuer</TabsTrigger>
-                            <TabsTrigger value="Recipient">Recipient</TabsTrigger>
+                            <TabsTrigger value="issuer">Issuer</TabsTrigger>
+                            <TabsTrigger value="recipient">Recipient</TabsTrigger>
                         </TabsList>
+
                         {form.watch('estimateCompany').map((company, index) => (
-                            <TabsContent value={company.estimateCompanyParty} key={company.estimateCompanyId} className="max-w-md space-y-4 p-1">
+                            <TabsContent className="max-w-md space-y-4 p-1"
+                                value={company.estimateCompanyParty.toLowerCase()}
+                                key={company.estimateCompanyId}>
+
                                 <h2 className="text-2xl font-semibold">
                                     {company.estimateCompanyParty}
                                 </h2>
@@ -289,8 +324,10 @@ export default function EstimateForm() {
                                         </FormItem>
                                     )}
                                 />
+
                             </TabsContent>
                         ))}
+
                     </Tabs>
                     <Button type="submit">Submit</Button>
                 </form>

@@ -16,11 +16,11 @@ export const EstimatePdf: React.FC<EstimatePdfProps> = ({ estimate }) => {
                 <View style={styles.top}>
                     <Image src="/images/urban-home.jpg" style={styles.logo} />
                     <View style={styles.section}>
-                        <Text style={styles.pageTitle}>Estimate #{estimate.estimateId}</Text>
+                        <Text style={styles.pageTitle}>Estimate #{estimate.estimateRef}</Text>
                         <View style={styles.estimateMetadatas}>
                             <Text style={styles.estimateMetadata}>Subject Matter: {estimate.subjectMatter}</Text>
                             <Text style={styles.estimateMetadata}>Date of issue: {estimate.creationDate?.toLocaleDateString()}</Text>
-                            <Text style={styles.estimateMetadata}>Expiry date: {estimate.creationDate?.toLocaleDateString()}</Text>
+                            <Text style={styles.estimateMetadata}>Expiracy date: {estimate.expiracyDate?.toLocaleDateString()}</Text>
                         </View>
                     </View>
                 </View>

@@ -25,10 +25,12 @@ export interface EstimateCompany {
 
 export interface Estimate {
     estimateId: number;
+    estimateRef: string;
     userCredentialsId: number;
     subjectMatter: string;
     creationDate?: Date;
     updateDate?: Date;
+    expiracyDate?: Date;
     estimateDetail: EstimateDetail[];
     estimateCompany: EstimateCompany[];
 }
