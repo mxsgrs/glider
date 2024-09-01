@@ -6,8 +6,8 @@
     "en": "Anglais",
     "fr": "Français"
   },
-  "estimate": {
-    "metadataTitle": "Devis",
+  "newEstimate": {
+    "metadataTitle": "Nouveau devis",
     "metadataDescription": "Créez un devis pour votre business."
   },
   "login": {

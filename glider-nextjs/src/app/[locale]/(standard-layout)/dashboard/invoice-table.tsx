@@ -59,7 +59,7 @@ const invoices = [
 ]
 
 export default function InvoiceTable() {
-    const t = useTranslations('home')
+    const t = useTranslations('dashboard')
 
     return (
         <div>

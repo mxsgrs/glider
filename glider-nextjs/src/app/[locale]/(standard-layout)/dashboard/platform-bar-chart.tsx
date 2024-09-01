@@ -16,7 +16,7 @@ const chartData = [
 ]
 
 export default function PlatformBarChart() {
-    const t = useTranslations('home')
+    const t = useTranslations('dashboard')
 
     const chartConfig = {
         desktop: {

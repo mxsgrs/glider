@@ -11,7 +11,7 @@ const kpiData = [
 ];
 
 export default function Kpis() {
-    const t = useTranslations('home')
+    const t = useTranslations('dashboard')
 
     return (
         <div className="p-3 md:flex rounded bg-card">

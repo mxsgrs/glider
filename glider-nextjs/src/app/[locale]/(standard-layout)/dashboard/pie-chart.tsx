@@ -46,7 +46,7 @@ const chartConfig = {
 } satisfies ChartConfig
 
 export function BrowserPieChart() {
-    const t = useTranslations('home')
+    const t = useTranslations('dashboard')
 
     const totalVisitors = React.useMemo(() => {
         return chartData.reduce((acc, curr) => acc + curr.visitors, 0)

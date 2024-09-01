@@ -6,8 +6,8 @@
     "en": "English",
     "fr": "French"
   },
-  "estimate": {
-    "metadataTitle": "Estimate",
+  "newEstimate": {
+    "metadataTitle": "New estimate",
     "metadataDescription": "Create an estimate for your business."
   },
   "login": {
