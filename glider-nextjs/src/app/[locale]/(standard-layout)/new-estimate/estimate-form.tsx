@@ -24,6 +24,7 @@ import {
     TabsList,
     TabsTrigger,
 } from "@/components/ui/tabs"
+import { Textarea } from "@/components/ui/textarea"
 
 import { Estimate } from "@/types/estimate";
 import { EstimatePdf } from "./estimate-pdf";
@@ -66,6 +67,7 @@ const estimateSchema = z.object({
     expiracyDate: z.date().optional(),
     currency: z.string(),
     taxRate: z.number(),
+    conditions: z.string(),
     estimateDetail: z.array(estimateDetailSchema),
     estimateCompany: z.array(estimateCompanySchema),
 });
@@ -88,17 +90,18 @@ export default function EstimateForm() {
             estimateId: 1,
             estimateRef: "2394729",
             userCredentialsId: 1001,
-            subjectMatter: 'Web Development Project',
+            subjectMatter: 'Mise en réseau',
             creationDate: new Date(),
             updateDate: new Date(),
             expiracyDate: new Date(),
             currency: "EUR",
             taxRate: 20,
+            conditions: "Ce devis est valable pour une durée de trois mois. Concernant le réglement, un tiers à la commande et le solde à la livraison.",
             estimateDetail: [
                 {
                     estimateDetailId: 1,
                     estimateId: 1,
-                    rawDescription: 'Frontend Development',
+                    rawDescription: 'Pose de cables',
                     quantity: 50,
                     unitPrice: 100,
                     creationDate: new Date('2024-01-01'),
@@ -107,7 +110,7 @@ export default function EstimateForm() {
                 {
                     estimateDetailId: 2,
                     estimateId: 1,
-                    rawDescription: 'Backend Development',
+                    rawDescription: 'Raccordements électriques',
                     quantity: 60,
                     unitPrice: 120,
                     creationDate: new Date('2024-01-01'),
@@ -119,13 +122,13 @@ export default function EstimateForm() {
                     estimateCompanyId: 1,
                     estimateId: 1,
                     estimateCompanyParty: 'Issuer',
-                    businessName: 'Tech Solutions Inc.',
-                    businessAddress: '123 Tech Avenue, Silicon Valley, CA',
-                    phone: '555-1234',
-                    email: 'contact@techsolutions.com',
-                    taxNumber: 'TAX123456',
+                    businessName: 'Solutions Tech SAS',
+                    businessAddress: '12 Avenue de la Technologie, 75008 Paris, France',
+                    phone: '01 23 45 67 89',
+                    email: 'contact@solutionstech.fr',
+                    taxNumber: 'FR12345678901',
                     siretNumber: '12345678901234',
-                    sirenNumber: '987654321',
+                    sirenNumber: '123456789',
                     creationDate: new Date('2024-01-01'),
                     updateDate: new Date('2024-01-15'),
                 },
@@ -133,16 +136,17 @@ export default function EstimateForm() {
                     estimateCompanyId: 2,
                     estimateId: 1,
                     estimateCompanyParty: 'Recipient',
-                    businessName: 'Creative Agency LLC',
-                    businessAddress: '456 Design Street, New York, NY',
-                    phone: '555-5678',
-                    email: 'info@creativeagency.com',
-                    taxNumber: 'TAX987654',
+                    businessName: 'Agence Créative SARL',
+                    businessAddress: '89 Rue du Design, 33000 Bordeaux, France',
+                    phone: '05 67 89 01 23',
+                    email: 'info@agencecreative.fr',
+                    taxNumber: 'FR98765432109',
                     siretNumber: '23456789012345',
-                    sirenNumber: '123456789',
+                    sirenNumber: '987654321',
                     creationDate: new Date('2024-01-01'),
                     updateDate: new Date('2024-01-15'),
                 }
+
             ],
         },
     });
@@ -183,6 +187,7 @@ export default function EstimateForm() {
             expiracyDate: values.expiracyDate,
             currency: values.currency,
             taxRate: values.taxRate,
+            conditions: values.conditions,
             estimateCompany: values.estimateCompany.map((company, index) => ({
                 estimateCompanyId: company.estimateCompanyId,
                 estimateId: values.estimateId,
@@ -221,8 +226,8 @@ export default function EstimateForm() {
 
     return (
         <div className="md:flex md:flex-row my-6">
-            <div className="px-4 lg:min-w-[390px]">
-                <Form {...form}>
+            <Form {...form}>
+                <div className="px-4 lg:min-w-[390px]">
                     <form onSubmit={form.handleSubmit(onSubmit)} className="space-y-8">
                         {/* Estimate metadata */}
                         <div className="max-w-md space-y-4 p-1">
@@ -472,10 +477,50 @@ export default function EstimateForm() {
 
                             </Tabs>
                         </div>
+
+                        {/* Totals */}
+                        <div className="space-y-2">
+                            <h2 className="text-2xl font-semibold px-4">
+                                {t('payment')}
+                            </h2>
+                            <div className="max-w-md space-y-4 p-1">
+                                <FormField
+                                    control={form.control}
+                                    name="taxRate"
+                                    render={({ field }) => (
+                                        <FormItem>
+                                            <FormLabel>
+                                                {t('taxes')}
+                                            </FormLabel>
+                                            <FormControl>
+                                                <Input type="number" {...field} />
+                                            </FormControl>
+                                            <FormMessage />
+                                        </FormItem>
+                                    )}
+                                />
+
+                                <FormField
+                                    control={form.control}
+                                    name="conditions"
+                                    render={({ field }) => (
+                                        <FormItem>
+                                            <FormLabel>
+                                                {t('conditions')}
+                                            </FormLabel>
+                                            <FormControl>
+                                                <Textarea {...field} />
+                                            </FormControl>
+                                            <FormMessage />
+                                        </FormItem>
+                                    )}
+                                />
+                            </div>
+                        </div>
                         <Button className="m-1" type="submit">{t('download')}</Button>
                     </form>
-                </Form>
-            </div>
+                </div>
+            </Form>
             <div className="hidden lg:block">
                 <PDFViewer width={799} height={1190}>
                     <EstimatePdf estimate={form.getValues()} translations={t} />

@@ -31,7 +31,9 @@
     "quantity": "Quantity",
     "unitPrice": "Unit price",
     "amount": "Amount",
+    "payment": "Payment",
     "taxes": "Taxes",
+    "conditions": "Conditions",
     "total": "Total",
     "download": "Download"
   },

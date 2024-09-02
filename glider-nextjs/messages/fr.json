@@ -12,7 +12,7 @@
     "newEstimateOnline": "Nouveau devis en ligne",
     "estimateForBusiness": "Créez un devis pour votre activité.",
     "estimate": "Devis",
-    "estimateReference": "Reference du devis",
+    "estimateReference": "Référence du devis",
     "subjectMatter": "Sujet",
     "dateOfIssue": "Date d'émission",
     "expiracyDate": "Date d'echéance",
@@ -31,7 +31,9 @@
     "quantity": "Quantité",
     "unitPrice": "Prix unitaire",
     "amount": "Montant HT",
+    "payment": "Paiement",
     "taxes": "TVA",
+    "conditions": "Conditions",
     "total": "Total",
     "download": "Télécharger"
   },

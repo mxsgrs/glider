@@ -26,8 +26,9 @@ export const EstimatePdf: React.FC<EstimatePdfProps> = ({ estimate, translations
                 <View style={styles.top}>
                     <Image src="/images/urban-home.jpg" style={styles.logo} />
                     <View style={styles.section}>
-                        <Text style={styles.pageTitle}>{t('estimate')} #{estimate.estimateRef}</Text>
+                        <Text style={styles.pageTitle}>{t('estimate')}</Text>
                         <View style={styles.estimateMetadatas}>
+                            <Text style={styles.estimateMetadata}>{t('estimateReference')}: {estimate.estimateRef}</Text>
                             <Text style={styles.estimateMetadata}>{t('subjectMatter')}: {estimate.subjectMatter}</Text>
                             <Text style={styles.estimateMetadata}>{t('dateOfIssue')}: {estimate.creationDate?.toLocaleDateString()}</Text>
                             <Text style={styles.estimateMetadata}>{t('expiracyDate')}: {estimate.expiracyDate?.toLocaleDateString()}</Text>
@@ -68,8 +69,12 @@ const styles = StyleSheet.create({
         fontFamily: 'Open Sans',
         padding: 20,
     },
+    pageTitle: {
+        fontSize: 22,
+        fontWeight: 'bold',
+    },
     estimateMetadatas: {
-        marginTop: 10,
+        marginTop: 0,
     },
     estimateMetadata: {
         marginTop: 5,
@@ -105,10 +110,6 @@ const styles = StyleSheet.create({
         fontSize: 12,
         fontWeight: 'bold',
         marginBottom: 5,
-    },
-    pageTitle: {
-        fontSize: 18,
-        fontWeight: 'bold',
     },
     table: {
         display: 'flex',

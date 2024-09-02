@@ -33,6 +33,7 @@ export interface Estimate {
     expiracyDate?: Date;
     currency: string;
     taxRate: number;
+    conditions: string;
     estimateDetail: EstimateDetail[];
     estimateCompany: EstimateCompany[];
 }

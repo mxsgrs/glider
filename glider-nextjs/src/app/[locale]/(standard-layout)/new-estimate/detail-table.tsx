@@ -52,7 +52,12 @@ export const DetailTable: React.FC<DetailTableProps> = ({ estimate, translations
                     </View>
                 ))}
             </View>
-            <View style={styles.totals}>
+            <View style={styles.payment}>
+            <View style={styles.conditions}>
+                <Text style={[styles.title, styles.bold]}>{t('conditions')}</Text>
+                <Text style={styles.textArea}>{estimate.conditions}</Text>
+            </View>
+            <View style={styles.total}>
                 <View style={[styles.row, styles.header]} wrap={false}>
                     <Text style={[styles.col5, styles.bold]}>{t('total')}</Text>
                     <Text style={styles.col6}>{totalBeforeTax}{currencySymbol}</Text>
@@ -66,6 +71,7 @@ export const DetailTable: React.FC<DetailTableProps> = ({ estimate, translations
                     <Text style={[styles.col6, styles.bold]}>{totalAfterTax}{currencySymbol}</Text>
                 </View>
             </View>
+            </View>
         </div>
     );
 };
@@ -74,9 +80,21 @@ const styles = StyleSheet.create({
     table: {
         width: '100%',
     },
-    totals: {
+    payment: {
+        display: 'flex',
+        flexDirection: 'row',
+        gap: 60,
         marginTop: 20,
-        marginLeft: '70%',
+    },
+    conditions: {
+        flexBasis: '70%',
+        marginTop: 10
+    },
+    textArea: {
+        marginTop: 10
+    },
+    total: {
+        flexBasis: '30%'
     },
     row: {
         display: 'flex',
@@ -84,6 +102,11 @@ const styles = StyleSheet.create({
         borderTop: '1px solid #EEE',
         paddingTop: 8,
         paddingBottom: 8,
+    },
+    title: {
+        fontSize: 12,
+        fontWeight: 'bold',
+        marginBottom: 5,
     },
     header: {
         borderTop: 'none',
