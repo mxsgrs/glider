@@ -1,10 +1,12 @@
-"use client"
+"use client";
 
-import { saveAs } from 'file-saver';
-import { pdf, PDFViewer } from '@react-pdf/renderer';
+import { useState } from "react";
+import { saveAs } from "file-saver";
+import { pdf, PDFViewer } from "@react-pdf/renderer";
 import { zodResolver } from "@hookform/resolvers/zod"
-import { useForm, useFieldArray, Controller } from "react-hook-form"
+import { useForm, useFieldArray } from "react-hook-form"
 import { z } from "zod"
+import { useTranslations } from "next-intl";
 
 import { Input } from "@/components/ui/input"
 import { Button } from "@/components/ui/button"
@@ -22,10 +24,10 @@ import {
     TabsTrigger,
 } from "@/components/ui/tabs"
 
-import { Estimate } from '@/types/estimate';
-import { EstimatePdf } from './estimate-pdf';
+import { Estimate } from "@/types/estimate";
+import { EstimatePdf } from "./estimate-pdf";
 
-import DatePicker from './custom-date-picker';
+import DatePicker from "./custom-date-picker";
 
 // Schema
 const estimateDetailSchema = z.object({
@@ -66,6 +68,14 @@ const estimateSchema = z.object({
 });
 
 export default function EstimateForm() {
+    const t = useTranslations('newEstimate');
+
+    // Details tabs
+    const [tab, setTab] = useState("0");
+    const onTabChange = (value: string) => {
+        setTab(value);
+    }
+
     type FormValues = z.infer<typeof estimateSchema>
 
     // Default values
@@ -140,7 +150,9 @@ export default function EstimateForm() {
     });
 
     const addDetail = () => {
-        if (form.watch('estimateDetail').length < 8) {
+        const detailLength = form.watch('estimateDetail').length;
+
+        if (detailLength < 8) {
             append({
                 estimateDetailId: 0,
                 estimateId: 1,
@@ -149,7 +161,9 @@ export default function EstimateForm() {
                 unitPrice: 0,
                 creationDate: new Date(),
                 updateDate: new Date(),
-            })
+            });
+
+            setTab(detailLength.toString());
         }
     };
 
@@ -187,7 +201,7 @@ export default function EstimateForm() {
 
         try {
             // Generate PDF and save it into a file
-            const doc = <EstimatePdf estimate={estimate} />;
+            const doc = <EstimatePdf estimate={estimate} translations={t} />;
             const asPdf = pdf(doc);
 
             const pdfBlob = await asPdf.toBlob();
@@ -210,9 +224,11 @@ export default function EstimateForm() {
                                 name="estimateRef"
                                 render={({ field }) => (
                                     <FormItem>
-                                        <FormLabel>Estimate reference</FormLabel>
+                                        <FormLabel>
+                                            {t('estimateReference')}
+                                        </FormLabel>
                                         <FormControl>
-                                            <Input placeholder="Estimate reference" {...field} />
+                                            <Input placeholder={t('estimateReference')} {...field} />
                                         </FormControl>
                                     </FormItem>
                                 )}
@@ -223,9 +239,11 @@ export default function EstimateForm() {
                                 name="subjectMatter"
                                 render={({ field }) => (
                                     <FormItem>
-                                        <FormLabel>Subject matter</FormLabel>
+                                        <FormLabel>
+                                            {t('subjectMatter')}
+                                        </FormLabel>
                                         <FormControl>
-                                            <Input placeholder="Subject matter" {...field} />
+                                            <Input placeholder={t('subjectMatter')} {...field} />
                                         </FormControl>
                                     </FormItem>
                                 )}
@@ -235,7 +253,7 @@ export default function EstimateForm() {
                                 control={form.control}
                                 name="expiracyDate"
                                 render={({ }) => (
-                                    <DatePicker name="expiracyDate" control={form.control} label='Expiracy date' />
+                                    <DatePicker name="expiracyDate" control={form.control} label={t('expiracyDate')} />
                                 )}
                             />
                         </div>
@@ -243,12 +261,12 @@ export default function EstimateForm() {
                         {/* Issuer and recipient */}
                         <div className="space-y-2">
                             <h2 className="text-2xl font-semibold px-4">
-                                Companies
+                                {t('companies')}
                             </h2>
                             <Tabs defaultValue="issuer">
                                 <TabsList className="m-1 mx-2">
-                                    <TabsTrigger value="issuer">Issuer</TabsTrigger>
-                                    <TabsTrigger value="recipient">Recipient</TabsTrigger>
+                                    <TabsTrigger value="issuer">{t('issuer')}</TabsTrigger>
+                                    <TabsTrigger value="recipient">{t('recipient')}</TabsTrigger>
                                 </TabsList>
 
                                 {form.watch('estimateCompany').map((company, index) => (
@@ -261,9 +279,11 @@ export default function EstimateForm() {
                                             name={`estimateCompany.${index}.businessName`}
                                             render={({ field }) => (
                                                 <FormItem>
-                                                    <FormLabel>Business Name</FormLabel>
+                                                    <FormLabel>
+                                                        {t('businessName')}
+                                                    </FormLabel>
                                                     <FormControl>
-                                                        <Input placeholder="Business Name" {...field} />
+                                                        <Input placeholder={t('businessName')} {...field} />
                                                     </FormControl>
                                                 </FormItem>
                                             )}
@@ -274,9 +294,11 @@ export default function EstimateForm() {
                                             name={`estimateCompany.${index}.businessAddress`}
                                             render={({ field }) => (
                                                 <FormItem>
-                                                    <FormLabel>Business Address</FormLabel>
+                                                    <FormLabel>
+                                                        {t('businessName')}
+                                                    </FormLabel>
                                                     <FormControl>
-                                                        <Input placeholder="Business Address" {...field} />
+                                                        <Input placeholder={t('businessName')} {...field} />
                                                     </FormControl>
                                                 </FormItem>
                                             )}
@@ -287,9 +309,11 @@ export default function EstimateForm() {
                                             name={`estimateCompany.${index}.phone`}
                                             render={({ field }) => (
                                                 <FormItem>
-                                                    <FormLabel>Phone</FormLabel>
+                                                    <FormLabel>
+                                                        {t('phone')}
+                                                    </FormLabel>
                                                     <FormControl>
-                                                        <Input placeholder="Phone" {...field} />
+                                                        <Input placeholder={t('phone')} {...field} />
                                                     </FormControl>
                                                 </FormItem>
                                             )}
@@ -300,9 +324,11 @@ export default function EstimateForm() {
                                             name={`estimateCompany.${index}.email`}
                                             render={({ field }) => (
                                                 <FormItem>
-                                                    <FormLabel>Email</FormLabel>
+                                                    <FormLabel>
+                                                        {t('email')}
+                                                    </FormLabel>
                                                     <FormControl>
-                                                        <Input placeholder="Email" {...field} />
+                                                        <Input placeholder={t('email')} {...field} />
                                                     </FormControl>
                                                 </FormItem>
                                             )}
@@ -313,9 +339,11 @@ export default function EstimateForm() {
                                             name={`estimateCompany.${index}.taxNumber`}
                                             render={({ field }) => (
                                                 <FormItem>
-                                                    <FormLabel>Tax Number</FormLabel>
+                                                    <FormLabel>
+                                                        {t('taxNumber')}
+                                                    </FormLabel>
                                                     <FormControl>
-                                                        <Input placeholder="Tax Number" {...field} />
+                                                        <Input placeholder={t('taxNumber')} {...field} />
                                                     </FormControl>
                                                 </FormItem>
                                             )}
@@ -326,9 +354,11 @@ export default function EstimateForm() {
                                             name={`estimateCompany.${index}.siretNumber`}
                                             render={({ field }) => (
                                                 <FormItem>
-                                                    <FormLabel>SIRET Number</FormLabel>
+                                                    <FormLabel>
+                                                        {t('siretNumber')}
+                                                    </FormLabel>
                                                     <FormControl>
-                                                        <Input placeholder="SIRET Number" {...field} />
+                                                        <Input placeholder={t('siretNumber')} {...field} />
                                                     </FormControl>
                                                 </FormItem>
                                             )}
@@ -339,9 +369,11 @@ export default function EstimateForm() {
                                             name={`estimateCompany.${index}.sirenNumber`}
                                             render={({ field }) => (
                                                 <FormItem>
-                                                    <FormLabel>SIREN Number</FormLabel>
+                                                    <FormLabel>
+                                                        {t('sirenNumber')}
+                                                    </FormLabel>
                                                     <FormControl>
-                                                        <Input placeholder="SIREN Number" {...field} />
+                                                        <Input placeholder={t('sirenNumber')} {...field} />
                                                     </FormControl>
                                                 </FormItem>
                                             )}
@@ -356,9 +388,9 @@ export default function EstimateForm() {
                         {/* Details */}
                         <div className="space-y-2">
                             <h2 className="text-2xl font-semibold px-4">
-                                Details
+                                {t('details')}
                             </h2>
-                            <Tabs defaultValue="0">
+                            <Tabs value={tab} onValueChange={onTabChange}>
                                 <TabsList className="m-1 mx-2">
                                     {form.watch('estimateDetail').map((detail, index) => (
                                         <TabsTrigger value={index.toString()} key={index}>{index}</TabsTrigger>
@@ -376,9 +408,11 @@ export default function EstimateForm() {
                                             name={`estimateDetail.${index}.rawDescription`}
                                             render={({ field }) => (
                                                 <FormItem>
-                                                    <FormLabel>Description</FormLabel>
+                                                    <FormLabel>
+                                                        {t('description')}
+                                                    </FormLabel>
                                                     <FormControl>
-                                                        <Input placeholder="Description" {...field} />
+                                                        <Input placeholder={t('description')} {...field} />
                                                     </FormControl>
                                                 </FormItem>
                                             )}
@@ -389,7 +423,9 @@ export default function EstimateForm() {
                                             name={`estimateDetail.${index}.quantity`}
                                             render={({ field }) => (
                                                 <FormItem>
-                                                    <FormLabel>Quantity</FormLabel>
+                                                    <FormLabel>
+                                                        {t('quantity')}
+                                                    </FormLabel>
                                                     <FormControl>
                                                         <Input type="number" {...field} />
                                                     </FormControl>
@@ -402,7 +438,9 @@ export default function EstimateForm() {
                                             name={`estimateDetail.${index}.unitPrice`}
                                             render={({ field }) => (
                                                 <FormItem>
-                                                    <FormLabel>Unit price</FormLabel>
+                                                    <FormLabel>
+                                                        {t('unitPrice')}
+                                                    </FormLabel>
                                                     <FormControl>
                                                         <Input type="number" {...field} />
                                                     </FormControl>
@@ -415,13 +453,13 @@ export default function EstimateForm() {
 
                             </Tabs>
                         </div>
-                        <Button className="m-1" type="submit">Submit</Button>
+                        <Button className="m-1" type="submit">{t('download')}</Button>
                     </form>
                 </Form>
             </div>
             <div className="hidden lg:block">
                 <PDFViewer width={799} height={1190}>
-                    <EstimatePdf estimate={form.getValues()} />
+                    <EstimatePdf estimate={form.getValues()} translations={t} />
                 </PDFViewer>
             </div>
         </div>

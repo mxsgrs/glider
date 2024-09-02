@@ -7,8 +7,31 @@
     "fr": "French"
   },
   "newEstimate": {
-    "metadataTitle": "New estimate",
-    "metadataDescription": "Create an estimate for your business."
+    "metadataTitle": "Nouveau devis",
+    "metadataDescription": "Créez un devis pour votre business.",
+    "newEstimateOnline": "New estimate online",
+    "estimateForBusiness": "Create an estimate for your business.",
+    "estimate": "Estimate",
+    "estimateReference": "Estimate reference",
+    "subjectMatter": "Subject matter",
+    "dateOfIssue": "Date of issue",
+    "expiracyDate": "Expiracy date",
+    "companies": "Companies",
+    "issuer": "Issuer",
+    "recipient": "Recipient",
+    "businessName": "Business name",
+    "businessAddress": "Business address",
+    "phone": "Phone",
+    "email": "Email",
+    "taxNumber": "Tax number",
+    "siretNumber": "SIRET number",
+    "sirenNumber": "SIREN number",
+    "details": "Details",
+    "description": "Description",
+    "quantity": "Quantity",
+    "unitPrice": "Unit price",
+    "total": "Total",
+    "download": "Download"
   },
   "login": {
     "metadataTitle": "Login",

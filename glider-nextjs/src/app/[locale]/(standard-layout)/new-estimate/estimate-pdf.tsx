@@ -1,33 +1,43 @@
 "use client";
 
-import React from 'react';
-import { Page, Text, View, Document, StyleSheet, Font, Image } from '@react-pdf/renderer';
-import { Estimate } from '@/types/estimate';
-import ReportTable from './detail-table';
+import React from "react";
+import { Page, Text, View, Document, StyleSheet, Font, Image } from "@react-pdf/renderer";
+import { Estimate } from "@/types/estimate";
+import ReportTable from "./detail-table";
+import { TranslationValues, RichTranslationValues, MarkupTranslationValues, Formats } from "next-intl";
+import { ReactElement, ReactNodeArray } from 'react';
 
 interface EstimatePdfProps {
     estimate: Estimate;
+    translations: {
+        <TargetKey>(key: TargetKey, values?: TranslationValues, formats?: Partial<Formats>): string;
+        rich<TargetKey>(key: TargetKey, values?: RichTranslationValues, formats?: Partial<Formats>): string | ReactElement | ReactNodeArray;
+        markup<TargetKey>(key: TargetKey, values?: MarkupTranslationValues, formats?: Partial<Formats>): string;
+        raw<TargetKey>(key: TargetKey): any;
+    };
 }
 
-export const EstimatePdf: React.FC<EstimatePdfProps> = ({ estimate }) => {
+export const EstimatePdf: React.FC<EstimatePdfProps> = ({ estimate, translations }) => {
+    const t = translations;
+
     return (
         <Document>
             <Page style={styles.page}>
                 <View style={styles.top}>
                     <Image src="/images/urban-home.jpg" style={styles.logo} />
                     <View style={styles.section}>
-                        <Text style={styles.pageTitle}>Estimate #{estimate.estimateRef}</Text>
+                        <Text style={styles.pageTitle}>{t('estimate')} #{estimate.estimateRef}</Text>
                         <View style={styles.estimateMetadatas}>
-                            <Text style={styles.estimateMetadata}>Subject Matter: {estimate.subjectMatter}</Text>
-                            <Text style={styles.estimateMetadata}>Date of issue: {estimate.creationDate?.toLocaleDateString()}</Text>
-                            <Text style={styles.estimateMetadata}>Expiracy date: {estimate.expiracyDate?.toLocaleDateString()}</Text>
+                            <Text style={styles.estimateMetadata}>{t('subjectMatter')}: {estimate.subjectMatter}</Text>
+                            <Text style={styles.estimateMetadata}>{t('dateOfIssue')}: {estimate.creationDate?.toLocaleDateString()}</Text>
+                            <Text style={styles.estimateMetadata}>{t('expiracyDate')}: {estimate.expiracyDate?.toLocaleDateString()}</Text>
                         </View>
                     </View>
                 </View>
                 <View style={styles.companies}>
                     {estimate.estimateCompany.map((company) => (
                         <View key={company.estimateCompanyId} style={styles.company}>
-                            <Text style={styles.header}>{company.estimateCompanyParty}</Text>
+                            <Text style={styles.header}>{t(company.estimateCompanyParty.toLowerCase())}</Text>
                             <Text style={styles.companyDetail}>{company.businessName}</Text>
                             <Text style={styles.companyDetail}>{company.businessAddress}</Text>
                             <Text style={styles.companyDetail}>{company.phone}</Text>
@@ -36,8 +46,8 @@ export const EstimatePdf: React.FC<EstimatePdfProps> = ({ estimate }) => {
                     ))}
                 </View>
                 <View style={styles.section}>
-                    <Text style={styles.header}>Details</Text>
-                    <ReportTable data={estimate.estimateDetail} />
+                    <Text style={styles.header}>{t('details')}</Text>
+                    <ReportTable data={estimate.estimateDetail} translations={t} />
                 </View>
             </Page>
         </Document>
