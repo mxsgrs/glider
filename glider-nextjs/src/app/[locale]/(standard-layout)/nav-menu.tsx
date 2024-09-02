@@ -2,6 +2,7 @@
 
 import * as React from "react"
 import { Menu } from 'lucide-react';
+import { useTranslations } from "next-intl";
 
 import {
   NavigationMenu,
@@ -20,8 +21,10 @@ import {
 } from "@/components/ui/sheet"
 
 export default function NavMenu() {
+  const tEstimate = useTranslations('newEstimate');
+  
   const links = [
-    { href: "/new-estimate", label: "New estimate" },
+    { href: "/new-estimate", label: tEstimate('metadataTitle') },
   ];
 
   return (
