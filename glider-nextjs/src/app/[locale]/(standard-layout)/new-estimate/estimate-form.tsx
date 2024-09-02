@@ -8,6 +8,10 @@ import { useForm, useFieldArray } from "react-hook-form"
 import { z } from "zod"
 import { useTranslations } from "next-intl";
 
+import { Locale } from "date-fns";
+import { enGB, fr } from "date-fns/locale";
+import { getLocale } from "next-intl/server";
+
 import { Input } from "@/components/ui/input"
 import { Button } from "@/components/ui/button"
 import {
@@ -73,7 +77,20 @@ const estimateSchema = z.object({
     estimateCompany: z.array(estimateCompanySchema),
 });
 
-export default function EstimateForm() {
+export interface EstimateFormProps {
+    locale: string;
+}
+
+export default function EstimateForm({ locale }: EstimateFormProps) {
+
+    var hello = enGB;
+
+    switch (locale) {
+        case "fr":
+            hello = fr;
+            break;
+    }
+
     const t = useTranslations('newEstimate');
 
     // Company logo hook
@@ -317,7 +334,7 @@ export default function EstimateForm() {
                                 control={form.control}
                                 name="expiracyDate"
                                 render={({ }) => (
-                                    <DatePicker name="expiracyDate" control={form.control} label={t('expiracyDate')} />
+                                    <DatePicker name="expiracyDate" locale={hello} control={form.control} label={t('expiracyDate')} />
                                 )}
                             />
                         </div>

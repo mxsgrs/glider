@@ -2,7 +2,7 @@
 import type { Metadata } from "next"
 import AppMetadata from "@/components/ui/app-metadata";
 import { LocaleParams } from "@/types/locale-params";
-import { useTranslations } from "next-intl";
+import { useTranslations, useLocale } from "next-intl";
 
 const page = 'newEstimate';
 
@@ -16,11 +16,12 @@ import EstimateForm from "./estimate-form";
 
 export default function Page() {
   const t = useTranslations('newEstimate');
+  const locale = useLocale();
 
   return (
     <div className="max-w-screen-2xl mx-auto">
       <PageHeader title={t('newEstimateOnline')} subtitle={t('estimateForBusiness')} />
-      <EstimateForm />
+      <EstimateForm locale={locale} />
     </div>
   );
 }

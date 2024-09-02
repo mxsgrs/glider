@@ -7,18 +7,21 @@ import { Button } from '@/components/ui/button';
 import { format } from 'date-fns';
 
 import {
-    FormControl,
-    FormItem,
-    FormLabel,
+  FormControl,
+  FormItem,
+  FormLabel,
 } from "@/components/ui/form"
+
+import { Locale } from 'date-fns';
 
 interface DatePickerProps {
   name: string;
   label: string,
+  locale: Locale,
   control: any;
 }
 
-const DatePicker: React.FC<DatePickerProps> = ({ name, label, control }) => {
+const DatePicker: React.FC<DatePickerProps> = ({ name, label, locale, control }) => {
   const { field } = useController({ name, control });
   const [selectedDate, setSelectedDate] = useState<Date | undefined>(field.value || undefined);
 
@@ -39,7 +42,7 @@ const DatePicker: React.FC<DatePickerProps> = ({ name, label, control }) => {
               className="w-full justify-start text-left font-normal"
             >
               <CalendarIcon className="mr-2 h-4 w-4" />
-              {selectedDate ? format(selectedDate, 'PPP') : <span>Pick a date</span>}
+              {selectedDate ? format(selectedDate, 'PPP', { 'locale': locale }) : <span>Pick a date</span>}
             </Button>
           </PopoverTrigger>
           <PopoverContent className="w-auto p-0">
@@ -47,7 +50,7 @@ const DatePicker: React.FC<DatePickerProps> = ({ name, label, control }) => {
               mode="single"
               selected={selectedDate}
               onSelect={handleDateChange}
-              initialFocus
+              initialFocus locale={locale}
             />
           </PopoverContent>
         </Popover>
