@@ -27,6 +27,7 @@ export interface Estimate {
     estimateId: number;
     estimateRef: string;
     userCredentialsId: number;
+    logo: string;
     subjectMatter: string;
     creationDate?: Date;
     updateDate?: Date;
