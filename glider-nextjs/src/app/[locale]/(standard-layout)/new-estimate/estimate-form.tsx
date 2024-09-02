@@ -64,6 +64,8 @@ const estimateSchema = z.object({
     creationDate: z.date().optional(),
     updateDate: z.date().optional(),
     expiracyDate: z.date().optional(),
+    currency: z.string(),
+    taxRate: z.number(),
     estimateDetail: z.array(estimateDetailSchema),
     estimateCompany: z.array(estimateCompanySchema),
 });
@@ -90,6 +92,8 @@ export default function EstimateForm() {
             creationDate: new Date(),
             updateDate: new Date(),
             expiracyDate: new Date(),
+            currency: "EUR",
+            taxRate: 20,
             estimateDetail: [
                 {
                     estimateDetailId: 1,
@@ -177,6 +181,8 @@ export default function EstimateForm() {
             creationDate: values.creationDate,
             updateDate: values.updateDate,
             expiracyDate: values.expiracyDate,
+            currency: values.currency,
+            taxRate: values.taxRate,
             estimateCompany: values.estimateCompany.map((company, index) => ({
                 estimateCompanyId: company.estimateCompanyId,
                 estimateId: values.estimateId,

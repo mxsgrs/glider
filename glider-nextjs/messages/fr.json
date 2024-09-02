@@ -30,6 +30,8 @@
     "description": "Description",
     "quantity": "Quantité",
     "unitPrice": "Prix unitaire",
+    "amount": "Montant HT",
+    "taxes": "TVA",
     "total": "Total",
     "download": "Télécharger"
   },

@@ -30,6 +30,8 @@
     "description": "Description",
     "quantity": "Quantity",
     "unitPrice": "Unit price",
+    "amount": "Amount",
+    "taxes": "Taxes",
     "total": "Total",
     "download": "Download"
   },

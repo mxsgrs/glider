@@ -1,6 +1,6 @@
 export interface MetadataParams {
     params: {
-        locale: string,
-        page: string
+        locale: String,
+        page: String
     }
 }

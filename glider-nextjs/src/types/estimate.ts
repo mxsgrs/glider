@@ -31,6 +31,8 @@ export interface Estimate {
     creationDate?: Date;
     updateDate?: Date;
     expiracyDate?: Date;
+    currency: string;
+    taxRate: number;
     estimateDetail: EstimateDetail[];
     estimateCompany: EstimateCompany[];
 }

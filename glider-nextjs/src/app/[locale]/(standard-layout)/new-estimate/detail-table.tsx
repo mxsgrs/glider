@@ -1,12 +1,11 @@
-import { EstimateDetail } from "@/types/estimate";
 import { StyleSheet, Text, View } from "@react-pdf/renderer";
-import PropTypes from "prop-types";
+import { Estimate } from "@/types/estimate";
 
 import { TranslationValues, RichTranslationValues, MarkupTranslationValues, Formats } from "next-intl";
 import { ReactElement, ReactNodeArray } from 'react';
 
 type DetailTableProps = {
-    data: EstimateDetail[];
+    estimate: Estimate;
     translations: {
         <TargetKey>(key: TargetKey, values?: TranslationValues, formats?: Partial<Formats>): string;
         rich<TargetKey>(key: TargetKey, values?: RichTranslationValues, formats?: Partial<Formats>): string | ReactElement | ReactNodeArray;
@@ -15,36 +14,69 @@ type DetailTableProps = {
     };
 };
 
-export const DetailTable: React.FC<DetailTableProps> = ({ data, translations }) => {
+export const DetailTable: React.FC<DetailTableProps> = ({ estimate, translations }) => {
     const t = translations;
 
+    var currencySymbol = "€";
+    switch (estimate.currency) {
+        case "EUR":
+            currencySymbol = "€"
+            break;
+
+        case "USD":
+            currencySymbol = "$"
+            break;
+    }
+
+    const totalBeforeTax = estimate.estimateDetail.reduce((result, current) => {
+        return result + (current.quantity * current.unitPrice);
+    }, 0)
+
+    const totalAfterTax = totalBeforeTax * (1 + estimate.taxRate / 100);
+
     return (
-        <View style={styles.table}>
-            <View style={[styles.row, styles.bold, styles.header]}>
-                <Text style={styles.col1}>{t('description')}</Text>
-                <Text style={styles.col2}>{t('quantity')}</Text>
-                <Text style={styles.col3}>{t('unitPrice')}</Text>
-                <Text style={styles.col4}>{t('total')}</Text>
-            </View>
-            {data.map((row) => (
-                <View key={row.estimateDetailId} style={styles.row} wrap={false}>
-                    <Text style={styles.col1}>{row.rawDescription}</Text>
-                    <Text style={styles.col2}>{row.quantity}</Text>
-                    <Text style={styles.col3}>{Number(row.unitPrice).toFixed(2)}</Text>
-                    <Text style={styles.col4}>{(row.quantity*row.unitPrice).toFixed(2)}</Text>
+        <div className="">
+            <View style={styles.table}>
+                <View style={[styles.row, styles.bold, styles.header]}>
+                    <Text style={styles.col1}>{t('description')}</Text>
+                    <Text style={styles.col2}>{t('quantity')}</Text>
+                    <Text style={styles.col3}>{t('unitPrice')}</Text>
+                    <Text style={styles.col4}>{t('amount')}</Text>
                 </View>
-            ))}
-        </View>
+                {estimate.estimateDetail.map((row) => (
+                    <View key={row.estimateDetailId} style={styles.row} wrap={false}>
+                        <Text style={styles.col1}>{row.rawDescription}</Text>
+                        <Text style={styles.col2}>{row.quantity}</Text>
+                        <Text style={styles.col3}>{Number(row.unitPrice).toFixed(2)}{currencySymbol}</Text>
+                        <Text style={styles.col4}>{(row.quantity * row.unitPrice).toFixed(2)}{currencySymbol}</Text>
+                    </View>
+                ))}
+            </View>
+            <View style={styles.totals}>
+                <View style={[styles.row, styles.header]} wrap={false}>
+                    <Text style={[styles.col5, styles.bold]}>{t('total')}</Text>
+                    <Text style={styles.col6}>{totalBeforeTax}{currencySymbol}</Text>
+                </View>
+                <View style={styles.row} wrap={false}>
+                    <Text style={[styles.col5, styles.bold]}>{t('taxes')}</Text>
+                    <Text style={styles.col6}>{`${Number(estimate.taxRate).toFixed(2)}%`}</Text>
+                </View>
+                <View style={styles.row} wrap={false}>
+                    <Text style={[styles.col5, styles.bold]}>{t('total')}</Text>
+                    <Text style={[styles.col6, styles.bold]}>{totalAfterTax}{currencySymbol}</Text>
+                </View>
+            </View>
+        </div>
     );
 };
-
-DetailTable.propTypes = {
-    data: PropTypes.array.isRequired,
-}
 
 const styles = StyleSheet.create({
     table: {
         width: '100%',
+    },
+    totals: {
+        marginTop: 20,
+        marginLeft: '70%',
     },
     row: {
         display: 'flex',
@@ -70,6 +102,12 @@ const styles = StyleSheet.create({
     },
     col4: {
         width: '15%',
+    },
+    col5: {
+        width: '50%',
+    },
+    col6: {
+        width: '50%',
     }
 })
 

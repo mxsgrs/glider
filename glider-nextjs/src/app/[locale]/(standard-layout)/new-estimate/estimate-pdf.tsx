@@ -47,7 +47,7 @@ export const EstimatePdf: React.FC<EstimatePdfProps> = ({ estimate, translations
                 </View>
                 <View style={styles.section}>
                     <Text style={styles.header}>{t('details')}</Text>
-                    <ReportTable data={estimate.estimateDetail} translations={t} />
+                    <ReportTable estimate={estimate} translations={t} />
                 </View>
             </Page>
         </Document>
