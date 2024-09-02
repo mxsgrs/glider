@@ -16,6 +16,7 @@ import {
     FormField,
     FormItem,
     FormLabel,
+    FormMessage,
 } from "@/components/ui/form"
 import {
     Tabs,
@@ -34,8 +35,8 @@ const estimateDetailSchema = z.object({
     estimateDetailId: z.number(),
     estimateId: z.number(),
     rawDescription: z.string(),
-    quantity: z.number(),
-    unitPrice: z.number(),
+    quantity: z.coerce.number(),
+    unitPrice: z.coerce.number(),
     creationDate: z.date().optional(),
     updateDate: z.date().optional(),
 });
@@ -213,7 +214,7 @@ export default function EstimateForm() {
     }
 
     return (
-        <div className="flex flex-row my-6">
+        <div className="md:flex md:flex-row my-6">
             <div className="px-4 lg:min-w-[390px]">
                 <Form {...form}>
                     <form onSubmit={form.handleSubmit(onSubmit)} className="space-y-8">
@@ -230,6 +231,7 @@ export default function EstimateForm() {
                                         <FormControl>
                                             <Input placeholder={t('estimateReference')} {...field} />
                                         </FormControl>
+                                        <FormMessage />
                                     </FormItem>
                                 )}
                             />
@@ -245,6 +247,7 @@ export default function EstimateForm() {
                                         <FormControl>
                                             <Input placeholder={t('subjectMatter')} {...field} />
                                         </FormControl>
+                                        <FormMessage />
                                     </FormItem>
                                 )}
                             />
@@ -285,6 +288,7 @@ export default function EstimateForm() {
                                                     <FormControl>
                                                         <Input placeholder={t('businessName')} {...field} />
                                                     </FormControl>
+                                                    <FormMessage />
                                                 </FormItem>
                                             )}
                                         />
@@ -300,6 +304,7 @@ export default function EstimateForm() {
                                                     <FormControl>
                                                         <Input placeholder={t('businessName')} {...field} />
                                                     </FormControl>
+                                                    <FormMessage />
                                                 </FormItem>
                                             )}
                                         />
@@ -315,6 +320,7 @@ export default function EstimateForm() {
                                                     <FormControl>
                                                         <Input placeholder={t('phone')} {...field} />
                                                     </FormControl>
+                                                    <FormMessage />
                                                 </FormItem>
                                             )}
                                         />
@@ -330,6 +336,7 @@ export default function EstimateForm() {
                                                     <FormControl>
                                                         <Input placeholder={t('email')} {...field} />
                                                     </FormControl>
+                                                    <FormMessage />
                                                 </FormItem>
                                             )}
                                         />
@@ -345,6 +352,7 @@ export default function EstimateForm() {
                                                     <FormControl>
                                                         <Input placeholder={t('taxNumber')} {...field} />
                                                     </FormControl>
+                                                    <FormMessage />
                                                 </FormItem>
                                             )}
                                         />
@@ -360,6 +368,7 @@ export default function EstimateForm() {
                                                     <FormControl>
                                                         <Input placeholder={t('siretNumber')} {...field} />
                                                     </FormControl>
+                                                    <FormMessage />
                                                 </FormItem>
                                             )}
                                         />
@@ -375,6 +384,7 @@ export default function EstimateForm() {
                                                     <FormControl>
                                                         <Input placeholder={t('sirenNumber')} {...field} />
                                                     </FormControl>
+                                                    <FormMessage />
                                                 </FormItem>
                                             )}
                                         />
@@ -414,6 +424,7 @@ export default function EstimateForm() {
                                                     <FormControl>
                                                         <Input placeholder={t('description')} {...field} />
                                                     </FormControl>
+                                                    <FormMessage />
                                                 </FormItem>
                                             )}
                                         />
@@ -429,6 +440,7 @@ export default function EstimateForm() {
                                                     <FormControl>
                                                         <Input type="number" {...field} />
                                                     </FormControl>
+                                                    <FormMessage />
                                                 </FormItem>
                                             )}
                                         />
@@ -444,6 +456,7 @@ export default function EstimateForm() {
                                                     <FormControl>
                                                         <Input type="number" {...field} />
                                                     </FormControl>
+                                                    <FormMessage />
                                                 </FormItem>
                                             )}
                                         />
