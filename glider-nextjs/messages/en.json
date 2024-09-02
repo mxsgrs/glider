@@ -30,6 +30,7 @@
     "description": "Description",
     "quantity": "Quantity",
     "unitPrice": "Unit price",
+    "remove": "Remove",
     "amount": "Amount",
     "payment": "Payment",
     "taxes": "Taxes",

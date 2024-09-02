@@ -30,6 +30,7 @@
     "description": "Description",
     "quantity": "Quantité",
     "unitPrice": "Prix unitaire",
+    "remove": "Supprimer",
     "amount": "Montant HT",
     "payment": "Paiement",
     "taxes": "TVA",

@@ -153,12 +153,12 @@ export default function EstimateForm() {
 
     const { control } = form;
 
-    const { fields, append } = useFieldArray({
+    const { fields, append, remove } = useFieldArray({
         control,
         name: "estimateDetail"
     });
 
-    const addDetail = () => {
+    function addDetail() {
         const detailLength = form.watch('estimateDetail').length;
 
         if (detailLength < 8) {
@@ -175,6 +175,15 @@ export default function EstimateForm() {
             setTab(detailLength.toString());
         }
     };
+
+    function removeDetail() {
+        const index = parseInt(tab, 10);
+
+        if (!isNaN(index) && index >= 0 && index < fields.length) {
+            remove(index);
+            setTab(Math.max(index - 1, 0).toString());
+        }
+    }
 
     async function onSubmit(values: FormValues) {
         const estimate: Estimate = {
@@ -474,8 +483,10 @@ export default function EstimateForm() {
 
                                     </TabsContent>
                                 ))}
-
                             </Tabs>
+                            <div className="p-1">
+                                <Button type="button" onClick={removeDetail}>{t('remove')}</Button>
+                            </div>
                         </div>
 
                         {/* Totals */}
@@ -517,7 +528,9 @@ export default function EstimateForm() {
                                 />
                             </div>
                         </div>
-                        <Button className="m-1" type="submit">{t('download')}</Button>
+                        <div className="p-1">
+                            <Button className="w-full" type="submit">{t('download')}</Button>
+                        </div>
                     </form>
                 </div>
             </Form>
