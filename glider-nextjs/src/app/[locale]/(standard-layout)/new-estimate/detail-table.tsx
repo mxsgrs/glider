@@ -35,7 +35,7 @@ export const DetailTable: React.FC<DetailTableProps> = ({ estimate, translations
     const totalAfterTax = totalBeforeTax * (1 + estimate.taxRate / 100);
 
     return (
-        <div className="">
+        <div>
             <View style={styles.table}>
                 <View style={[styles.row, styles.bold, styles.header]}>
                     <Text style={styles.col1}>{t('description')}</Text>
@@ -53,24 +53,24 @@ export const DetailTable: React.FC<DetailTableProps> = ({ estimate, translations
                 ))}
             </View>
             <View style={styles.payment}>
-            <View style={styles.conditions}>
-                <Text style={[styles.title, styles.bold]}>{t('conditions')}</Text>
-                <Text style={styles.textArea}>{estimate.conditions}</Text>
-            </View>
-            <View style={styles.total}>
-                <View style={[styles.row, styles.header]} wrap={false}>
-                    <Text style={[styles.col5, styles.bold]}>{t('total')}</Text>
-                    <Text style={styles.col6}>{totalBeforeTax}{currencySymbol}</Text>
+                <View style={styles.conditions}>
+                    <Text style={[styles.title, styles.bold]}>{t('conditions')}</Text>
+                    <Text style={styles.textArea}>{estimate.conditions}</Text>
                 </View>
-                <View style={styles.row} wrap={false}>
-                    <Text style={[styles.col5, styles.bold]}>{t('taxes')}</Text>
-                    <Text style={styles.col6}>{`${Number(estimate.taxRate).toFixed(2)}%`}</Text>
+                <View style={styles.totalTable}>
+                    <View style={[styles.row, styles.noTop]} wrap={false}>
+                        <Text style={[styles.col5, styles.bold]}>{t('total')}</Text>
+                        <Text style={styles.col6}>{totalBeforeTax}{currencySymbol}</Text>
+                    </View>
+                    <View style={styles.row} wrap={false}>
+                        <Text style={[styles.col5, styles.bold]}>{t('taxes')}</Text>
+                        <Text style={styles.col6}>{`${Number(estimate.taxRate).toFixed(2)}%`}</Text>
+                    </View>
+                    <View style={[styles.row, styles.total]} wrap={false}>
+                        <Text style={[styles.col5, styles.bold]}>{t('total')}</Text>
+                        <Text style={[styles.col6, styles.bold]}>{totalAfterTax}{currencySymbol}</Text>
+                    </View>
                 </View>
-                <View style={styles.row} wrap={false}>
-                    <Text style={[styles.col5, styles.bold]}>{t('total')}</Text>
-                    <Text style={[styles.col6, styles.bold]}>{totalAfterTax}{currencySymbol}</Text>
-                </View>
-            </View>
             </View>
         </div>
     );
@@ -78,38 +78,46 @@ export const DetailTable: React.FC<DetailTableProps> = ({ estimate, translations
 
 const styles = StyleSheet.create({
     table: {
-        width: '100%',
+        width: '100%'
     },
     payment: {
         display: 'flex',
         flexDirection: 'row',
-        gap: 60,
+        gap: 50,
         marginTop: 20,
     },
     conditions: {
-        flexBasis: '70%',
+        color: '#707070',
+        flexBasis: '64.5%',
+        border: '1px solid #EEE',
+        padding: 10,
         marginTop: 10
     },
     textArea: {
-        marginTop: 10
+        lineHeight: 1.8,
+        marginTop: 5
     },
-    total: {
-        flexBasis: '30%'
+    totalTable: {
+        flexBasis: '35.5%'
+    },
+    total: { },
+    header: {
+        backgroundColor: '#EEE',
+        borderTop: 'none',
+    },
+    noTop: {
+        borderTop: 'none',
     },
     row: {
         display: 'flex',
         flexDirection: 'row',
         borderTop: '1px solid #EEE',
-        paddingTop: 8,
-        paddingBottom: 8,
+        padding: 8,
     },
     title: {
         fontSize: 12,
         fontWeight: 'bold',
         marginBottom: 5,
-    },
-    header: {
-        borderTop: 'none',
     },
     bold: {
         fontWeight: 'bold',
