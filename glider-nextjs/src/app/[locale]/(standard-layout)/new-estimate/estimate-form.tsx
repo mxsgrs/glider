@@ -3,15 +3,16 @@
 import { useState, ChangeEvent, useEffect } from "react";
 import { saveAs } from "file-saver";
 import { pdf, PDFViewer } from "@react-pdf/renderer";
-import { zodResolver } from "@hookform/resolvers/zod"
-import { useForm, useFieldArray } from "react-hook-form"
-import { z } from "zod"
+import { zodResolver } from "@hookform/resolvers/zod";
+import { useForm, useFieldArray } from "react-hook-form";
+import { z } from "zod";
+
 
 import { useTranslations, useLocale } from "next-intl";
 import { enUS, fr } from "date-fns/locale";
 
-import { Input } from "@/components/ui/input"
-import { Button } from "@/components/ui/button"
+import { Input } from "@/components/ui/input";
+import { Button } from "@/components/ui/button";
 import {
     Form,
     FormControl,
@@ -19,13 +20,13 @@ import {
     FormItem,
     FormLabel,
     FormMessage,
-} from "@/components/ui/form"
+} from "@/components/ui/form";
 import {
     Tabs,
     TabsContent,
     TabsList,
     TabsTrigger,
-} from "@/components/ui/tabs"
+} from "@/components/ui/tabs";
 import { Textarea } from "@/components/ui/textarea"
 
 import { Estimate } from "@/types/estimate";
@@ -103,7 +104,6 @@ export default function EstimateForm() {
     var parsedData = null;
     if (savedData) {
         parsedData = JSON.parse(savedData) as FormValues;
-        // console.log(parsedData?.logo);
     }
 
     // Company logo hook
@@ -124,6 +124,7 @@ export default function EstimateForm() {
     };
 
     // Form default values
+    const date = new Date();
     var form = useForm<FormValues>({
         resolver: zodResolver(estimateSchema),
         defaultValues: {
@@ -134,7 +135,7 @@ export default function EstimateForm() {
             subjectMatter:  parsedData?.subjectMatter || t('subjectMatterText'),
             creationDate: new Date(),
             updateDate: new Date(),
-            expiracyDate: new Date(),
+            expiracyDate: new Date(date.setMonth(date.getMonth() + 3)),
             currency: "EUR",
             taxRate:  parsedData?.taxRate || 20,
             conditions:  parsedData?.conditions || t('conditionsText'),
@@ -197,7 +198,6 @@ export default function EstimateForm() {
 
     // Store form in localStorage
     useEffect(() => {
-        console.log(watchFields.logo);
         localStorage.setItem('estimateForm', JSON.stringify(watchFields));
     }, [watchFields]);
 
@@ -599,14 +599,14 @@ export default function EstimateForm() {
                             </div>
                         </div>
                         <div className="p-1">
-                            <Button className="w-full" type="submit">{t('download')}</Button>
+                            <Button className="w-full" onClick={() => onSubmit(watchFields)} type="submit">{t('download')}</Button>
                         </div>
                     </form>
                 </Form>
             </div>
             <div className="hidden lg:block">
                 <PDFViewer width={799} height={1190}>
-                    <EstimatePdf estimate={form.getValues()} translations={t} />
+                    <EstimatePdf estimate={watchFields} translations={t} />
                 </PDFViewer>
             </div>
         </div>
