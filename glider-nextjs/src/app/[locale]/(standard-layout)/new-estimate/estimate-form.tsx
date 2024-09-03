@@ -274,8 +274,8 @@ export default function EstimateForm() {
 
     return (
         <div className="md:flex md:flex-row my-6">
-            <Form {...form}>
-                <div className="px-4 lg:min-w-[390px]">
+            <div className="px-4 lg:min-w-[390px]">
+                <Form {...form}>
                     <form onSubmit={form.handleSubmit(onSubmit)} className="space-y-8">
                         {/* Estimate metadata */}
                         <div className="max-w-md space-y-4 p-1">
@@ -587,8 +587,8 @@ export default function EstimateForm() {
                             <Button className="w-full" type="submit">{t('download')}</Button>
                         </div>
                     </form>
-                </div>
-            </Form>
+                </Form>
+            </div>
             <div className="hidden lg:block">
                 <PDFViewer width={799} height={1190}>
                     <EstimatePdf estimate={form.getValues()} translations={t} />
