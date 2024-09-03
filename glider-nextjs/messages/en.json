@@ -36,6 +36,7 @@
     "payment": "Payment",
     "taxes": "Taxes",
     "conditions": "Conditions",
+    "totalBeforeTax": "Subtotal",
     "total": "Total",
     "download": "Download"
   },

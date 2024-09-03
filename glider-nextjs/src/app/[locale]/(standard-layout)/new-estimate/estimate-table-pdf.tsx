@@ -59,16 +59,16 @@ export const EstimateTablePdf: React.FC<EstimateTablePdfProps> = ({ estimate, tr
                 </View>
                 <View style={styles.totalTable}>
                     <View style={[styles.row, styles.noTop]} wrap={false}>
-                        <Text style={[styles.col5, styles.bold]}>{t('total')}</Text>
-                        <Text style={styles.col6}>{totalBeforeTax}{currencySymbol}</Text>
+                        <Text style={[styles.col5, styles.bold]}>{t('totalBeforeTax')}</Text>
+                        <Text style={styles.col6}>{Number(totalBeforeTax).toFixed(2)}{currencySymbol}</Text>
                     </View>
-                    <View style={styles.row} wrap={false}>
+                    <View style={[styles.row]} wrap={false}>
                         <Text style={[styles.col5, styles.bold]}>{t('taxes')}</Text>
                         <Text style={styles.col6}>{`${Number(estimate.taxRate).toFixed(2)}%`}</Text>
                     </View>
-                    <View style={[styles.row, styles.total]} wrap={false}>
+                    <View style={[styles.row, styles.totalRow]} wrap={false}>
                         <Text style={[styles.col5, styles.bold]}>{t('total')}</Text>
-                        <Text style={[styles.col6, styles.bold]}>{totalAfterTax}{currencySymbol}</Text>
+                        <Text style={[styles.col6, styles.bold]}>{Number(totalAfterTax).toFixed(2)}{currencySymbol}</Text>
                     </View>
                 </View>
             </View>
@@ -100,13 +100,15 @@ const styles = StyleSheet.create({
     totalTable: {
         flexBasis: '35.5%'
     },
-    total: { },
+    totalRow: {
+        fontSize: 12,
+    },
     header: {
         backgroundColor: '#EEE',
         borderTop: 'none',
     },
     noTop: {
-        borderTop: 'none',
+        border: 'none',
     },
     row: {
         display: 'flex',

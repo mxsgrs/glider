@@ -36,6 +36,7 @@
     "payment": "Paiement",
     "taxes": "TVA",
     "conditions": "Conditions",
+    "totalBeforeTax": "Total HT",
     "total": "Total",
     "download": "Télécharger"
   },
