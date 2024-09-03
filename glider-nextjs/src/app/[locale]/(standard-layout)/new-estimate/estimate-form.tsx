@@ -100,10 +100,12 @@ export default function EstimateForm() {
     type FormValues = z.infer<typeof estimateSchema>
 
     // Read cached form values
-    const savedData = localStorage.getItem('estimateForm');
     var parsedData = null;
-    if (savedData) {
-        parsedData = JSON.parse(savedData) as FormValues;
+    if (window !== undefined) {
+        const savedData = localStorage?.getItem('estimateForm');
+        if (savedData) {
+            parsedData = JSON.parse(savedData) as FormValues;
+        }
     }
 
     // Company logo hook
@@ -198,7 +200,9 @@ export default function EstimateForm() {
 
     // Store form in localStorage
     useEffect(() => {
-        localStorage.setItem('estimateForm', JSON.stringify(watchFields));
+        if (window !== undefined) {
+            localStorage?.setItem('estimateForm', JSON.stringify(watchFields));
+        }
     }, [watchFields]);
 
     // Write logo in form property
