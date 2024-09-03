@@ -28,7 +28,7 @@ export const EstimateTablePdf: React.FC<EstimateTablePdfProps> = ({ estimate, tr
             break;
     }
 
-    const totalBeforeTax = estimate.estimateDetail.reduce((result, current) => {
+    const totalBeforeTax = estimate.details.reduce((result, current) => {
         return result + (current.quantity * current.unitPrice);
     }, 0)
 
@@ -43,8 +43,8 @@ export const EstimateTablePdf: React.FC<EstimateTablePdfProps> = ({ estimate, tr
                     <Text style={styles.col3}>{t('unitPrice')}</Text>
                     <Text style={styles.col4}>{t('amount')}</Text>
                 </View>
-                {estimate.estimateDetail.map((row) => (
-                    <View key={row.estimateDetailId} style={styles.row} wrap={false}>
+                {estimate.details.map((row) => (
+                    <View key={row.id} style={styles.row} wrap={false}>
                         <Text style={styles.col1}>{row.rawDescription}</Text>
                         <Text style={styles.col2}>{row.quantity}</Text>
                         <Text style={styles.col3}>{Number(row.unitPrice).toFixed(2)}{currencySymbol}</Text>

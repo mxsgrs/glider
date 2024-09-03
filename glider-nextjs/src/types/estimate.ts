@@ -1,5 +1,5 @@
 export interface EstimateDetail {
-    estimateDetailId: number;
+    id: number;
     estimateId: number;
     rawDescription: string;
     quantity: number;
@@ -9,7 +9,7 @@ export interface EstimateDetail {
 }
 
 export interface EstimateCompany {
-    estimateCompanyId: number;
+    id: number;
     estimateId: number;
     estimateCompanyParty: 'Issuer' | 'Recipient';
     businessName: string;
@@ -24,8 +24,8 @@ export interface EstimateCompany {
 }
 
 export interface Estimate {
-    estimateId: number;
-    estimateRef: string;
+    id: number;
+    reference: string;
     userCredentialsId: number;
     logo: string;
     subjectMatter: string;
@@ -35,6 +35,6 @@ export interface Estimate {
     currency: string;
     taxRate: number;
     conditions: string;
-    estimateDetail: EstimateDetail[];
-    estimateCompany: EstimateCompany[];
+    details: EstimateDetail[];
+    companies: EstimateCompany[];
 }

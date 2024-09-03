@@ -32,7 +32,7 @@ export const EstimatePdf: React.FC<EstimatePdfProps> = ({ estimate, translations
                     <View style={styles.section}>
                         <Text style={styles.pageTitle}>{t('estimate')}</Text>
                         <View style={styles.estimateMetadatas}>
-                            <Text style={styles.estimateMetadata}>{t('estimateReference')}: {estimate.estimateRef}</Text>
+                            <Text style={styles.estimateMetadata}>{t('reference')}: {estimate.reference}</Text>
                             <Text style={styles.estimateMetadata}>{t('subjectMatter')}: {estimate.subjectMatter}</Text>
                             <Text style={styles.estimateMetadata}>{t('dateOfIssue')}: {estimate.creationDate?.toLocaleDateString()}</Text>
                             <Text style={styles.estimateMetadata}>{t('expiracyDate')}: {estimate.expiracyDate?.toLocaleDateString()}</Text>
@@ -40,8 +40,8 @@ export const EstimatePdf: React.FC<EstimatePdfProps> = ({ estimate, translations
                     </View>
                 </View>
                 <View style={styles.companies}>
-                    {estimate.estimateCompany.map((company) => (
-                        <View key={company.estimateCompanyId} style={styles.company}>
+                    {estimate.companies.map((company) => (
+                        <View key={company.id} style={styles.company}>
                             <Text style={styles.header}>{t(company.estimateCompanyParty.toLowerCase())}</Text>
                             {isNotEmpty(company.businessName) && <Text style={styles.companyDetail}>{company.businessName}</Text>}
                             {isNotEmpty(company.businessAddress) && <Text style={styles.companyDetail}>{company.businessAddress}</Text>}
