@@ -14,5 +14,29 @@ export default function sitemap(): MetadataRoute.Sitemap {
         },
       },
     },
+    {
+      url: 'https://glider-logistics.com/legal',
+      lastModified: new Date(),
+      changeFrequency: 'yearly',
+      priority: .8,
+      alternates: {
+        languages: {
+          en: 'https://glider-logistics.com/en/legal',
+          fr: 'https://glider-logistics.com/fr/legal',
+        },
+      },
+    },
+    {
+      url: 'https://glider-logistics.com/privacy-policy',
+      lastModified: new Date(),
+      changeFrequency: 'yearly',
+      priority: .8,
+      alternates: {
+        languages: {
+          en: 'https://glider-logistics.com/en/privacy-policy',
+          fr: 'https://glider-logistics.com/fr/privacy-policy',
+        },
+      },
+    },
   ]
 }

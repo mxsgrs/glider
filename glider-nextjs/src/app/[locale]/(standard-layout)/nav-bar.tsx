@@ -1,6 +1,6 @@
 import NavMenu from "./nav-menu"
-import { Bebas_Neue } from 'next/font/google';
 import LocaleSelect from "@/components/ui/locale-select";
+import { Bebas_Neue } from 'next/font/google';
 
 const bebasNeue = Bebas_Neue({
   weight: "400",
