@@ -4,7 +4,7 @@ import { Estimate } from "@/types/estimate";
 import { TranslationValues, RichTranslationValues, MarkupTranslationValues, Formats } from "next-intl";
 import { ReactElement, ReactNodeArray } from 'react';
 
-type DetailTableProps = {
+type EstimateTablePdfProps = {
     estimate: Estimate;
     translations: {
         <TargetKey>(key: TargetKey, values?: TranslationValues, formats?: Partial<Formats>): string;
@@ -14,7 +14,7 @@ type DetailTableProps = {
     };
 };
 
-export const DetailTable: React.FC<DetailTableProps> = ({ estimate, translations }) => {
+export const EstimateTablePdf: React.FC<EstimateTablePdfProps> = ({ estimate, translations }) => {
     const t = translations;
 
     var currencySymbol = "€";
@@ -142,4 +142,4 @@ const styles = StyleSheet.create({
     }
 })
 
-export default DetailTable
+export default EstimateTablePdf

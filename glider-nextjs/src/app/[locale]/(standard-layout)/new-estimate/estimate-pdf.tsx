@@ -3,7 +3,7 @@
 import React from "react";
 import { Page, Text, View, Document, StyleSheet, Font, Image } from "@react-pdf/renderer";
 import { Estimate } from "@/types/estimate";
-import ReportTable from "./detail-table";
+import EstimateTablePdf from "./estimate-table-pdf";
 import { TranslationValues, RichTranslationValues, MarkupTranslationValues, Formats } from "next-intl";
 import { ReactElement, ReactNodeArray } from 'react';
 
@@ -19,6 +19,10 @@ interface EstimatePdfProps {
 
 export const EstimatePdf: React.FC<EstimatePdfProps> = ({ estimate, translations }) => {
     const t = translations;
+
+    function isNotEmpty(input: string) {
+        return input !== undefined && input != "";
+    }
 
     return (
         <Document>
@@ -39,15 +43,18 @@ export const EstimatePdf: React.FC<EstimatePdfProps> = ({ estimate, translations
                     {estimate.estimateCompany.map((company) => (
                         <View key={company.estimateCompanyId} style={styles.company}>
                             <Text style={styles.header}>{t(company.estimateCompanyParty.toLowerCase())}</Text>
-                            <Text style={styles.companyDetail}>{company.businessName}</Text>
-                            <Text style={styles.companyDetail}>{company.businessAddress}</Text>
-                            <Text style={styles.companyDetail}>{company.phone}</Text>
-                            <Text style={styles.companyDetail}>{company.email}</Text>
+                            {isNotEmpty(company.businessName) && <Text style={styles.companyDetail}>{company.businessName}</Text>}
+                            {isNotEmpty(company.businessAddress) && <Text style={styles.companyDetail}>{company.businessAddress}</Text>}
+                            {isNotEmpty(company.phone) && <Text style={styles.companyDetail}>{company.phone}</Text>}
+                            {isNotEmpty(company.email) && <Text style={styles.companyDetail}>{company.email}</Text>}
+                            {isNotEmpty(company.taxNumber) && <Text style={styles.companyDetail}>{t('taxNumber')}: {company.taxNumber}</Text>}
+                            {isNotEmpty(company.siretNumber) && <Text style={styles.companyDetail}>{t('siretNumber')}: {company.siretNumber}</Text>}
+                            {isNotEmpty(company.sirenNumber) && <Text style={styles.companyDetail}>{t('sirenNumber')}: {company.sirenNumber}</Text>}
                         </View>
                     ))}
                 </View>
                 <View style={styles.section}>
-                    <ReportTable estimate={estimate} translations={t} />
+                    <EstimateTablePdf estimate={estimate} translations={t} />
                 </View>
             </Page>
         </Document>
