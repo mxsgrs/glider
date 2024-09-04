@@ -134,14 +134,14 @@ export default function EstimateForm() {
             reference: parsedData?.reference || "2394729",
             userCredentialsId: 1001,
             logo: base64String,
-            subjectMatter:  parsedData?.subjectMatter || t('subjectMatterText'),
+            subjectMatter: parsedData?.subjectMatter || t('subjectMatterText'),
             creationDate: new Date(),
             updateDate: new Date(),
             expiracyDate: new Date(date.setMonth(date.getMonth() + 3)),
             currency: "EUR",
-            taxRate:  parsedData?.taxRate || 20,
-            conditions:  parsedData?.conditions || t('conditionsText'),
-            details:  parsedData?.details || [
+            taxRate: parsedData?.taxRate || 20,
+            conditions: parsedData?.conditions || t('conditionsText'),
+            details: parsedData?.details || [
                 {
                     id: 1,
                     estimateId: 1,
@@ -161,7 +161,7 @@ export default function EstimateForm() {
                     updateDate: new Date('2024-01-15'),
                 }
             ],
-            companies:  parsedData?.companies || [
+            companies: parsedData?.companies || [
                 {
                     id: 1,
                     estimateId: 1,
@@ -292,10 +292,10 @@ export default function EstimateForm() {
     }
 
     return (
-        <div className="md:flex md:flex-row my-6">
-            <div className="px-4 lg:min-w-[390px]">
-                <Form {...form}>
-                    <form onSubmit={form.handleSubmit(onSubmit)} className="space-y-8">
+        <Form {...form}>
+            <form onSubmit={form.handleSubmit(onSubmit)}>
+                <div className="md:grid md:grid-cols-2 xl:grid-cols-[1fr_auto_1fr] gap-2 space-y-8 md:space-y-0 my-6">
+                    <div className="px-4 space-y-8">
                         {/* Estimate metadata */}
                         <div className="max-w-md space-y-4 p-1">
                             <FormField
@@ -488,7 +488,13 @@ export default function EstimateForm() {
 
                             </Tabs>
                         </div>
-
+                    </div>
+                    <div className="hidden xl:block">
+                        <PDFViewer width={799} height={1190}>
+                            <EstimatePdf estimate={watchFields} translations={t} />
+                        </PDFViewer>
+                    </div>
+                    <div className="px-4 space-y-8">
                         {/* Details */}
                         <div className="space-y-2">
                             <h2 className="text-2xl font-semibold px-4">
@@ -554,7 +560,6 @@ export default function EstimateForm() {
                                                 </FormItem>
                                             )}
                                         />
-
                                     </TabsContent>
                                 ))}
                             </Tabs>
@@ -602,17 +607,12 @@ export default function EstimateForm() {
                                 />
                             </div>
                         </div>
-                        <div className="p-1">
+                        <div className="max-w-md p-1">
                             <Button className="w-full" onClick={() => onSubmit(watchFields)} type="submit">{t('download')}</Button>
                         </div>
-                    </form>
-                </Form>
-            </div>
-            <div className="hidden lg:block">
-                <PDFViewer width={799} height={1190}>
-                    <EstimatePdf estimate={watchFields} translations={t} />
-                </PDFViewer>
-            </div>
-        </div>
+                    </div>
+                </div>
+            </form>
+        </Form>
     )
 }
