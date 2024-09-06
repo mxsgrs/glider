@@ -24,7 +24,7 @@ export default function NavMenu() {
   const tEstimate = useTranslations('newEstimate');
   
   const links = [
-    { href: "/new-estimate", label: tEstimate('metadataTitle') },
+    { href: "/new-estimate", label: tEstimate('estimate') },
   ];
 
   return (
