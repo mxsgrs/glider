@@ -316,7 +316,7 @@ export default function EstimateForm() {
     return (
         <Form {...form}>
             <form onSubmit={form.handleSubmit(onSubmit)}>
-                <div className="md:grid md:grid-cols-2 xl:grid-cols-[1fr_2fr_1fr] gap-2 space-y-8 md:space-y-0 my-6">
+                <div className="md:grid md:grid-cols-2 xl:grid-cols-[1fr_799px_1fr] space-y-8 md:space-y-0 my-6">
                     <div className="px-4 space-y-8">
                         {/* Estimate metadata */}
                         <div className="max-w-md space-y-4 p-1">
