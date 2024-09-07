@@ -1,5 +1,5 @@
 export interface LocaleParams {
     params: {
-        locale: String;
+        locale: string;
     };
 }

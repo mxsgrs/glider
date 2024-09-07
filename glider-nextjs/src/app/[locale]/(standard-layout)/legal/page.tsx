@@ -7,7 +7,8 @@ import { useTranslations } from "next-intl";
 const page = 'legal';
 
 export async function generateMetadata({ params: { locale } }: LocaleParams): Promise<Metadata> {
-  return await AppMetadata({ params: { locale, page } });
+    let path = "legal";
+    return await AppMetadata({ params: { locale, page, path } });
 }
 
 export default function Page() {

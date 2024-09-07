@@ -6,7 +6,8 @@ import { LocaleParams } from "@/types/locale-params";
 const page = 'login';
 
 export async function generateMetadata({ params: { locale } }: LocaleParams): Promise<Metadata> {
-  return await AppMetadata({ params: { locale, page } });
+  let path = "login";
+  return await AppMetadata({ params: { locale, page, path } });
 }
 
 // Page

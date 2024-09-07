@@ -7,7 +7,8 @@ import { useTranslations } from "next-intl";
 const page = 'newEstimate';
 
 export async function generateMetadata({ params: { locale } }: LocaleParams): Promise<Metadata> {
-  return await AppMetadata({ params: { locale, page } });
+  let path = "new-estimate";
+  return await AppMetadata({ params: { locale, page, path } });
 }
 
 // Page
