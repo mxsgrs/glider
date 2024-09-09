@@ -1,2 +1,0 @@
-# Glider
-Business application
